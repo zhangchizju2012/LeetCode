@@ -33,7 +33,7 @@ print "current page: " + stack1[-1]
 while(True):
     user_input = raw_input("Enter: ")
     if user_input != "<" and user_input != ">":
-        if len(stack2)>0 :
+        if len(stack2)>0 :# should delete memory in stack2
             stack2 = []
         stack1.append(user_input)
         print "current page: " + user_input
@@ -45,11 +45,11 @@ while(True):
         else:
             print user_input + " is an invalid action"
     elif user_input == ">":
-        try:
+        if len(stack2)>0:
             item = stack2.pop()
             stack1.append(item)
             print "current page: " + item
-        except:
+        else:
             print user_input + " is an invalid action"
 """
 # version 1
