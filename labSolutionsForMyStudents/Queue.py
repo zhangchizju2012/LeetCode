@@ -45,6 +45,7 @@ class CircularQueue:
         if self.__count== self.__capacity:
             raise Exception('Error: Queue is full') 
         if len(self.__items) < self.__capacity:
+            self.__count +=1
             self.__items.append(item) 
         else:
             self.__items[self.__tail]=item 
