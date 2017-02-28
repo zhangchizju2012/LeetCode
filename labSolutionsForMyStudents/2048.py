@@ -110,6 +110,11 @@ while True:
     if direction == 'q':
         break
     after = move(origin,direction)
+    while after == origin:
+        direction = input('next move: ')
+        if direction == 'q':
+            break
+        after = move(origin,direction)
     origin = addNumber(after)
     for row in origin:
         print(row)
