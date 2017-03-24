@@ -20,7 +20,7 @@ class Solution(object):
         result = 0
         for i in range(32):
             d[i] = d[i] % 3
-        if d[31] == 0:
+        if d[31] == 0:#符号位
             for i in range(32):
                 if d[i] == 1:
                     result = result + (1<<i)
@@ -28,7 +28,7 @@ class Solution(object):
             for i in range(32):
                 if d[i] == 0:
                     result = result + (1<<i)
-            result = -result - 1
+            result = -result - 1#补码原码转换http://www.cnblogs.com/wxf0701/archive/2008/08/14/1267639.html
         return result
     
 s = Solution()
