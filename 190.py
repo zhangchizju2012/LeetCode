@@ -9,7 +9,7 @@ Created on Sun Mar 26 23:04:24 2017
 class Solution:
     # @param n, an integer
     # @return an integer
-    def reverseBits(self, n):
+    def reverseBits2(self, n):
         binaryList = []
         while n!=0:
             binaryList.append(n%2)
@@ -21,6 +21,14 @@ class Solution:
         for i in range(len(binaryList)-1,-1,-1):
             result += weight * binaryList[i]
             weight *= 2
+        return result
+    def reverseBits(self, n):
+        result = 0
+        weight = 2 ** 31
+        while n!=0:
+            result += weight * (n%2)
+            n=n//2
+            weight = weight//2
         return result
         
 s = Solution()
