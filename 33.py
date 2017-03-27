@@ -36,6 +36,6 @@ class Solution(object):
                     else:
                         r = m - 1
         return -1
-        
+# http://fisherlei.blogspot.ca/2013/01/leetcode-search-in-rotated-sorted-array.html        
 s = Solution()
 print s.search([4, 5, 6, 7, 0, 1, 2],4)
