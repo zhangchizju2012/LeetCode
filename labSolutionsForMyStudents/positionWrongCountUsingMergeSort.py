@@ -19,7 +19,7 @@ class Solution:
             else: 
                 result.append(right[j]) 
                 j+=1
-                self.number+=len(left)
+                self.number+=len(left[i:])
         result += left[i:] 
         result += right[j:]
         return result
@@ -34,5 +34,5 @@ class Solution:
         return self.merge(left,right)
 
 s = Solution()
-print s.mergeSort([10,9,8,7,6,5,4,3,2,1])
+print s.mergeSort([2,4,3,1])
 print s.number
