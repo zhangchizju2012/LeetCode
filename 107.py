@@ -5,7 +5,6 @@ Created on Wed Mar 29 21:01:54 2017
 
 @author: zhangchi
 """
-import copy
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -23,22 +22,17 @@ class Solution(object):
         result = []
         if root is not None:
             tempResult.append(root)
-            saveTempResult = copy.deepcopy(tempResult)
-            result.append(saveTempResult)
-        label = True
-        while label:
+            result.append(tempResult)
+        while len(tempResult) > 0:
             resultMiddel = []
-            label = False
-            while len(tempResult) > 0:
-                temp = tempResult.pop(0)
+            for i in range(len(tempResult)):
+                temp = tempResult[i]
                 if temp.left is not None:
                     resultMiddel.append(temp.left)
                 if temp.right is not None:
                     resultMiddel.append(temp.right)
-                label = True
-            saveResultMiddel = copy.deepcopy(resultMiddel)
-            if len(saveResultMiddel) > 0:
-                result.append(saveResultMiddel)
+            if len(resultMiddel) > 0:
+                result.append(resultMiddel)
             tempResult = resultMiddel
         final = []
         while len(result) > 0:
@@ -48,13 +42,11 @@ class Solution(object):
                 tempFinal.append(item.val)
             final.append(tempFinal)
         return final
-root = None        
-#==============================================================================
-# root = TreeNode(3)
-# root.left = TreeNode(9)
-# root.right = TreeNode(20)
-# root.right.left = TreeNode(15)
-# root.right.right = TreeNode(7)
-#==============================================================================
+#root = None        
+root = TreeNode(3)
+root.left = TreeNode(9)
+root.right = TreeNode(20)
+root.right.left = TreeNode(15)
+root.right.right = TreeNode(7)
 s = Solution()
 print(s.levelOrderBottom(root))
