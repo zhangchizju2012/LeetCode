@@ -12,5 +12,12 @@ class Solution(object):
         :type n: int
         :rtype: int
         """
-        step = 1
-        value = 
+        step = 0
+        value = 0
+        while value < n:
+            step += 1
+            value += step
+        if value == n:
+            return step
+        else:
+            return step - 1
