@@ -32,4 +32,5 @@ class Solution(object):
                     temp.append(point.right)
                 if point.left is not None:
                     temp.append(point.left)
+            return result
                 
