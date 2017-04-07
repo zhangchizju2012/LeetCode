@@ -12,6 +12,21 @@ class Solution(object):
         :type prices: List[int]
         :rtype: int
         """
+        if len(prices) == 0:
+            return 0
+        low = prices[0]
+        result = 0
+        for item in prices:
+            if item < low:
+                low = item
+            result = max(result,item-low)
+        return result
+    
+    def maxProfit2(self, prices):
+        """
+        :type prices: List[int]
+        :rtype: int
+        """
         length = len(prices)
         if length == 1 or length == 0:
             return 0
