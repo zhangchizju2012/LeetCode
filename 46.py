@@ -18,6 +18,33 @@ For example,
   [3,2,1]
 ]
 """
+class Solution(object):
+    def __init__(self):
+        self.result = []
+
+    def permute(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        self.nums = nums
+        self.helper([])
+        return self.result
+        
+    def helper(self,stop):
+        if len(stop) == len(self.nums):
+            self.result.append(stop)
+        else:
+            for item in self.nums:
+                if item not in stop:
+                    self.helper(stop+[item])
+                
+S = Solution()
+print S.permute([1,2,3])        
+        
+        
+        
+'''
 class Solution:
     # @param num, a list of integer
     # @return a list of lists of integers
@@ -40,6 +67,7 @@ class Solution:
                 for item in temp:
                     result.append(item + [num[i]])
         return result
+'''
 '''
 class Solution:
     # @param num, a list of integer
@@ -94,5 +122,3 @@ class Solution:
                 res.append([num[i]] + j)
         return res
    '''     
-S = Solution()
-print S.permute([1,1,3])
