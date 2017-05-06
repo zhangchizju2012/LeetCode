@@ -2,39 +2,70 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jan 11 10:18:16 2017
+Edited on Sat May 6 8:28:16 2017
 
 @author: zhangchi
 """
 
 class Solution(object):
-    def __init__(self):
-        self.dict = []
     def canJump(self, nums):
         """
         :type nums: List[int]
         :rtype: bool
         """
-        length = len(nums)
-        
-        if length in self.dict:
-            return False     
-            
-        if length == 0 or length == 1:
+        if len(nums) <= 1:
             return True
-        for i in range(nums[0],0,-1):
-            if i == nums[0] and i+1 >= length:
-                return True
-            else:
-                if self.canJump(nums[i:]) == False:
-                    pass
-                else:
+        length = len(nums) - 1
+        previous = 0
+        now = nums[0]
+        temp = - float('inf')
+        label = True
+        while label:
+            label = False
+            for i in xrange(previous+1,now+1):
+                temp = max(temp, i+nums[i])
+                label = True
+                if temp >= length:
                     return True
-        self.dict.append(length)
+            previous = now
+            now = temp
         return False
-            
-S = Solution()
-nums = [2,3,1,1,4]
-print S.canJump(nums)
+
+s = Solution()
+nums = [5,0,0,0,0]
+print s.canJump(nums)
+
+#==============================================================================
+# class Solution(object):
+#     def __init__(self):
+#         self.dict = []
+#     def canJump(self, nums):
+#         """
+#         :type nums: List[int]
+#         :rtype: bool
+#         """
+#         length = len(nums)
+#         
+#         if length in self.dict:
+#             return False     
+#             
+#         if length == 0 or length == 1:
+#             return True
+#         for i in range(nums[0],0,-1):
+#             if i == nums[0] and i+1 >= length:
+#                 return True
+#             else:
+#                 if self.canJump(nums[i:]) == False:
+#                     pass
+#                 else:
+#                     return True
+#         self.dict.append(length)
+#         return False
+#             
+# S = Solution()
+# nums = [2,3,1,1,4]
+# print S.canJump(nums)
+#==============================================================================
 
 #bool canJump(int A[], int n) {#n代表长度，可以再进化，i < n && i <= reach &&  reach <= n
 #    int i = 0;
