@@ -7,10 +7,8 @@ Created on Tue May  9 14:39:43 2017
 """
 
 class Solution(object):
-    # it works, the same as lintcode 77, leetcode 72.
-    # however, recursion is not a good idea.
-    def __init__(self):
-        self.result = {}
+    # it works, but sames use list[list] is a better idea
+    # 用多重循环替代recursion
     def numDistinct(self, s, t):
         """
         :type s: str
@@ -19,29 +17,82 @@ class Solution(object):
         """
         lengthS = len(s)
         lengthT = len(t)
-        self.s = s
-        self.t = t
-        for i in xrange(lengthT+1):
-            self.result[(0,i)] = 0
+        result = [[0]*(lengthT+1) for _ in xrange(lengthS+1)]
         for i in xrange(lengthS+1):
-            self.result[(i,0)] = 1 # change order, because (0,0) should be 1
-        return self.helper(lengthS,lengthT)
-        
-    def helper(self,i,j):
-        if (i,j) not in self.result:
-            if self.s[i-1] == self.t[j-1]:
-                temp = self.helper(i-1,j-1) + self.helper(i-1,j)
-            else:
-                temp = self.helper(i-1,j)
-            self.result[(i,j)] = temp
-        return self.result[(i,j)]
+            result[i][0] = 1
+        for i in xrange(1,lengthS+1):
+            for j in xrange(1,lengthT+1):
+                # 先循环哪个后循环哪个根据具体情况具体分析，也可能有些题目这样循环不行
+                if s[i-1] == t[j-1]:
+                    result[i][j] = result[i-1][j-1] + result[i-1][j]
+                else:
+                    result[i][j] = result[i-1][j]
+        return result[lengthS][lengthT]
+
+#==============================================================================
+# class Solution(object):
+#     # it works, but sames use list[list] is a better idea
+#     def numDistinct(self, s, t):
+#         """
+#         :type s: str
+#         :type t: str
+#         :rtype: int
+#         """
+#         result = {}
+#         lengthS = len(s)
+#         lengthT = len(t)
+#         for i in xrange(lengthT+1):
+#             result[(0,i)] = 0
+#         for i in xrange(lengthS+1):
+#             result[(i,0)] = 1 # change order, because (0,0) should be 1
+#         for i in xrange(1,lengthS+1):
+#             for j in xrange(1,lengthT+1):
+#                 if s[i-1] == t[j-1]:
+#                     result[(i,j)] = result[(i-1,j-1)] + result[(i-1,j)]
+#                 else:
+#                     result[(i,j)] = result[(i-1,j)]
+#         return result[(lengthS,lengthT)]
+#==============================================================================
+
+#==============================================================================
+# class Solution(object):
+#     # it works, the same as lintcode 77, leetcode 72.
+#     # however, recursion is not a good idea, the same problem also exists in 77 & 72.
+#     def __init__(self):
+#         self.result = {}
+#     def numDistinct(self, s, t):
+#         """
+#         :type s: str
+#         :type t: str
+#         :rtype: int
+#         """
+#         lengthS = len(s)
+#         lengthT = len(t)
+#         self.s = s
+#         self.t = t
+#         for i in xrange(lengthT+1):
+#             self.result[(0,i)] = 0
+#         for i in xrange(lengthS+1):
+#             self.result[(i,0)] = 1 # change order, because (0,0) should be 1
+#         return self.helper(lengthS,lengthT)
+#         
+#     def helper(self,i,j):
+#         if (i,j) not in self.result:
+#             if self.s[i-1] == self.t[j-1]:
+#                 temp = self.helper(i-1,j-1) + self.helper(i-1,j)
+#             else:
+#                 temp = self.helper(i-1,j)
+#             self.result[(i,j)] = temp
+#         return self.result[(i,j)]
+#==============================================================================
                            
 s = Solution()
-print s.numDistinct("rabbbit", "rabbit")
+print s.numDistinct("raabbbit", "rabbit")
         
 
 #==============================================================================
 # class Solution(object):
+#     # wrong
 #     # can't solve this problem: aacaacca & ca
 #     # 把最后程序的最后几个变量print出来就知道是什么含义了
 #     # 确实能解决"lllraebbbitlll","rabit"的问题
