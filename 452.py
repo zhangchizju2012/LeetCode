@@ -6,6 +6,7 @@ Created on Sat May 13 17:41:46 2017
 @author: zhangchi
 """
 
+
 class Solution(object):
     def findMinArrowShots(self, points):
         """
