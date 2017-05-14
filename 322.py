@@ -7,6 +7,7 @@ Created on Sat May 13 22:13:24 2017
 """
 
 class Solution(object):
+    # 和279很像
     # bfs, improved by using hash table
     def coinChange(self, coins, amount):
         """
