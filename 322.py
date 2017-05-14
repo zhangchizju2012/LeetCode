@@ -7,7 +7,7 @@ Created on Sat May 13 22:13:24 2017
 """
 
 class Solution(object):
-    # bfs
+    # bfs, improved by using hash table
     def coinChange(self, coins, amount):
         """
         :type coins: List[int]
@@ -17,7 +17,7 @@ class Solution(object):
         if amount == 0:
             return 0
         stack = [amount]
-        searched = [amount]
+        searched = {amount:1}# the only difference
         result = 0
         while len(stack) > 0:
             result += 1
@@ -30,13 +30,46 @@ class Solution(object):
                         return result
                     elif value > 0 and value not in searched:
                         temp.append(value)
-                        searched.append(value)
+                        searched[value] = 1 # the only difference
             stack = temp
         return -1
+
+s = Solution()
+print s.coinChange([431,62,88,428],9084)
+
+#==============================================================================
+# class Solution(object):
+#     # bfs
+#     def coinChange(self, coins, amount):
+#         """
+#         :type coins: List[int]
+#         :type amount: int
+#         :rtype: int
+#         """
+#         if amount == 0:
+#             return 0
+#         stack = [amount]
+#         searched = [amount]
+#         result = 0
+#         while len(stack) > 0:
+#             result += 1
+#             temp = []
+#             while len(stack) > 0:
+#                 point = stack.pop()
+#                 for i in coins:
+#                     value = point - i
+#                     if value == 0:
+#                         return result
+#                     elif value > 0 and value not in searched:
+#                         temp.append(value)
+#                         searched.append(value)
+#             stack = temp
+#         return -1
+#==============================================================================
                     
 s = Solution()
-#print s.coinChange([3,7,405,436],8839)
-print s.coinChange([2],3)
+print s.coinChange([3,7,405,436],8839)
+#print s.coinChange([2],3)
 
 #==============================================================================
 # class Solution(object):
