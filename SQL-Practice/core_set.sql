@@ -77,3 +77,38 @@ from Movie, Reviewer, (select R1.rID, R1.mID
   and R1.ratingDate < R2.ratingDate) C
 where Movie.mID = C.mID
 and Reviewer.rID = C.rID;
+
+-- Q7
+SELECT title, stars
+From Movie, (SELECT mID, stars
+FROM Rating
+EXCEPT
+SELECT A.mID, A.stars
+FROM Rating A, Rating B
+WHERE A.mID = B.mID AND A.stars < B.stars) Data
+WHERE Movie.mID = Data.mID
+ORDER BY title
+
+-- Q8
+SELECT title, AVG(stars) as stars
+FROM Movie, Rating
+WHERE Movie.mID = Rating.mID
+GROUP BY Rating.mID
+ORDER BY stars DESC, title
+-- 分开写比较好 不容易错 更加符合逻辑
+
+-- Solution:
+select title, stars
+from Movie, ( select mID, avg(stars) as stars
+              from Rating
+              group by mID ) AvgRating
+where Movie.mID = AvgRating.mID
+order by stars DESC, title;
+
+
+-- Q9
+SELECT name
+From Reviewer, (SELECT rID, COUNT(rID) as number
+				FROM Rating
+				Group By rID) Data
+WHERE number >= 3 AND Reviewer.rID = Data.rID
