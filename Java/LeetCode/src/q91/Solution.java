@@ -1,0 +1,49 @@
+package q91;
+
+import java.util.HashMap;
+
+public class Solution {
+	String s;
+	HashMap<Integer, Integer> dic = new HashMap<Integer, Integer>();
+	int length;
+    public int numDecodings(String s) {
+        this.s = s;
+        length = s.length();
+        if(length == 0){
+        	return 0;
+        }else if(s.charAt(0) == '0'){
+        	return 0;
+        }else{
+        	return helper(length);
+        }
+    }
+    public int helper(int length){
+    	int value;
+    	if(length == 0){
+    		return 1;
+    	}else if(s.charAt(this.length-length) == '0'){
+    		return 0;
+    	}else if(length == 1){
+    		return 1;
+    	}else{
+    		if(dic.containsKey(length) == false){
+    			if("12".contains(String.valueOf(s.charAt(this.length-length))) == true){
+    				if(s.charAt(this.length-length+1)=='0' || (s.charAt(this.length-length)=='2' && "789".contains(String.valueOf(s.charAt(this.length-length+1))) == true)){
+    					value = helper(length-2);
+    				}else{
+    					value = helper(length-2) + helper(length-1);
+    				}
+    			}else{
+    				value = helper(length-1);
+    			}
+    			dic.put(length, value);
+    		}
+    		return dic.get(length);
+    	}
+    }
+    public static void main(String[] args) {
+    	String temp = "1111111";
+    	Solution s = new Solution();
+    	System.out.println(s.numDecodings(temp));
+    }
+}
