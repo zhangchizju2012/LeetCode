@@ -26,17 +26,32 @@ class Song implements Comparable<Song>{
 	}
 }
 
-class Comparison {
-	public static Comparator<Song> name = new Comparator<Song>(){
-		public int compare(Song s1, Song s2){
-			return s1.name.compareTo(s2.name);
-		}
-	};
-	public static Comparator<Song> year = new Comparator<Song>(){
-		public int compare(Song s1, Song s2){
-			return s1.year.compareTo(s2.year);
-		}
-	};
+// //this one also works, can be seen in github history
+//class Comparison {
+//	public static Comparator<Song> name = new Comparator<Song>(){
+//		@Override
+//		public int compare(Song s1, Song s2){
+//			return s1.name.compareTo(s2.name);
+//		}
+//	};
+//	public static Comparator<Song> year = new Comparator<Song>(){
+//		@Override
+//		public int compare(Song s1, Song s2){
+//			return s1.year.compareTo(s2.year);
+//		}
+//	};
+//}
+
+
+// 可以变成内部类：内部类最大的优点就在于它能够非常好的解决多重继承的问题（可能想继承多个抽象类或具体类而不仅是接口）
+class ComparisonByYear implements Comparator<Song>{
+
+	@Override
+	public int compare(Song o1, Song o2) {
+		// TODO Auto-generated method stub
+		return o1.year.compareTo(o2.year);
+	}
+	
 }
 
 public class musicSelection {
@@ -49,7 +64,9 @@ public class musicSelection {
 		//Collections.sort(ms.nameList);
 		Collections.sort(ms.songList);
 		System.out.println(ms.songList);
-		Collections.sort(ms.songList, Comparison.year);
+		//Collections.sort(ms.songList, Comparison.year);
+		ComparisonByYear cby = new ComparisonByYear();
+		Collections.sort(ms.songList, cby);
 		System.out.println(ms.songList);
 	}
 	public void getSongList(){
