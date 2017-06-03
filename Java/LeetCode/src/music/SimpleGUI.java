@@ -26,6 +26,8 @@ class MyDrawPanel extends JPanel{
 //public class SimpleGUI implements MouseListener {
 public class SimpleGUI implements ActionListener {
 	JButton button;
+	JButton button2;
+	JLabel label;
 	MyDrawPanel mp;
 	int count = 0;
 	public static void main(String[] args){
@@ -35,16 +37,21 @@ public class SimpleGUI implements ActionListener {
 		
 	public void go(){
 		JFrame frame = new JFrame();
-		button = new JButton("change color");
-		
-		//button.addMouseListener(this);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		button = new JButton("change color");
+		button2 = new JButton("change label");
 		frame.getContentPane().add(BorderLayout.SOUTH, button);
+		frame.getContentPane().add(BorderLayout.EAST, button2);
 		
 		mp = new MyDrawPanel();
 		frame.getContentPane().add(mp);
 		
-		frame.setSize(300, 300);
+		label = new JLabel();
+		label.setText("I'm a label.");
+		frame.getContentPane().add(BorderLayout.WEST, label);
+		
+		frame.setSize(500, 500);
 		frame.setVisible(true);
 		button.addActionListener(this);
 	}
