@@ -1,6 +1,8 @@
 package ood71myself;
 
 //public class BlackJackDeck extends Deck<BlackJackCard>{
+//Deck<BlackJackCard, BlackJackHand>这里要非常注意哦
+// extend了之后的东西就不用加<>了
 public class BlackJackDeck extends Deck<BlackJackCard, BlackJackHand>{
 
 	@Override
