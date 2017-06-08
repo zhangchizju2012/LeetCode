@@ -14,4 +14,21 @@ public abstract class Card {
 	public int getColor(){
 		return color;
 	}
+	public void print(){
+		System.out.print(value);
+		switch (color) {
+		case 1:
+			System.out.println(" 红桃");
+			break;
+		case 2:
+			System.out.println(" 方块");
+			break;
+		case 3:
+			System.out.println(" 草花");
+			break;
+		case 4:
+			System.out.println(" 黑桃");
+			break;
+		}
+	}
 }
