@@ -25,6 +25,7 @@ public class BlackJackDeck extends Deck<BlackJackCard, BlackJackHand>{
 			BlackJackHand[] bj = new BlackJackHand[playerNumber];
 			for(int i=0;i<playerNumber;i++){
 				bj[i] = new BlackJackHand();
+				bj[i].setPlayerName(i);
 				bj[i].addCard(getNextCard());
 			}
 			for(int i=0;i<playerNumber;i++){

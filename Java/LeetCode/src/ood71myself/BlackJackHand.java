@@ -46,5 +46,12 @@ public class BlackJackHand extends Hand<BlackJackCard>{
 		}
 		
 	}
+	public boolean isExplosion(){
+		if(getPoint()>21){
+			return true;
+		}else{
+			return false;
+		}
+	}
 	
 }
