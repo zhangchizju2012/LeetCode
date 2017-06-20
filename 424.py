@@ -7,9 +7,20 @@ Created on Mon Jun 19 20:08:02 2017
 """
 
 class Solution(object):
-    # 思路是看到solution第一条的题目：sliding window想到的，没有看内容，后面完全就是自己想的
+    # 思路是看到solution第一条的题目：sliding window想到的，只看到题目！没有看内容，后面完全就是自己想的
     # sliding window的dict版本和brute force版本
-    # 
+    # 思路：（假设string足够长）最开始的窗口大小为（2+k）,因为（1+k）的长度是肯定可以做到的，然后就看看（2+k）的长度
+    # 能否做到（判断n+k长度能否做到的方式：拉一个n+k长度的窗口，看这一窗口内，第一个元素出现的次数是否超过或者等于n次（我们最后
+    # 返回的最长序列，所包含的元素，肯定就是窗口的第一个元素，否则这一空就浪费了）），如果2+K能做到，就看3+k能否做到（其实并
+    # 不一定就是3+k,如果之前窗口里第一个元素的出现次数已经达到n了，那下次就可以判断n+1+k能否做到，这是我们要挑战的）这样逐一挑战
+    # 过去，直到挑战失败，最长序列就是n+k-1,因为n+k是我们挑战失败的，n+K-1是成功的 （每次新的挑战窗口也会相应变大）
+    # 需要注意的是：开始新的挑战，不需要从序列的开头重新开始，新的挑战的第一个窗口可以从上一次挑战的窗口开始（但是新的窗口会增大）
+    # 下面的第二个是dict版本，效率很高，击败98.5%，看起来可能比较费劲，看第一个会更容易理解（但是第一个效率很低，是n^n复杂度）
+    # 两个要传达的意思是一样的
+    # 这道题的难点在于sliding window从左向右滑，大小还在从小到大变，用dict比较难表达出来
+    # 之后的一些算法是为了避免下次调整重新在上一次挑战的地方开始，而希望从上一次的下一格开始，但是似乎还有bug，没有fix
+    # 做了一晚上，比较烦，主要是烦sliding window从左向右滑，大小还在从小到大变用dict如何表达出来
+    # 回家和洗澡的时候想到了哈哈哈
     def characterReplacement(self, s, k):
         """
         :type s: str
@@ -23,22 +34,51 @@ class Solution(object):
         temp = 2
         start = 0
         label = True
+        while label:
+            label = False
+            for i in xrange(start,length-temp+1):
+                count = 0
+                value = tempS[i]
+                for j in xrange(i,i+temp+k):
+                    if tempS[j] == value:
+                        count += 1
+                if count >= temp:
+                    temp = count + 1 
+                    start = i
+                    label = True
+                    break
+        return min(temp - 1 + k, length)
+        
+    def characterReplacement(self, s, k):
+        """
+        :type s: str
+        :type k: int
+        :rtype: int
+        """
+        length = len(s)
+        if length <= k + 1:
+            return length
+        tempS = s + k * "1"  # 配合line 70, line 74
+        # 最后返回的最长序列，所包含的元素肯定是第一个元素，为了保证后面窗口能放下，先加上一些元素，“1”只是任意的值，不是大写字母就行
+        temp = 2
+        start = 0
+        label = True
         check = True
         dic = {}
         while label:
             label = False
             for i in xrange(start,length-temp+1):
                 value = tempS[i]
-                if i == 0 and check:
+                if i == 0 and check:# 因为下次挑战可能又从这里开始了，check用来避免dict的重复初始化
                     check = False
-                    for j in xrange(i,i+temp+k):
+                    for j in xrange(i,i+temp+k): # 窗口大小为temp+k
                         if tempS[j] not in dic:
                             dic[tempS[j]] = 1
                         else:
                             dic[tempS[j]] += 1
-                elif i == start:
+                elif i == start: # dict已经建好了，不用处理
                     pass
-                else:
+                else: # 挪到下一格了
                     dic[tempS[i-1]] -= 1
                     if tempS[i+temp+k-1] not in dic:
                         dic[tempS[i+temp+k-1]] = 1
@@ -46,6 +86,7 @@ class Solution(object):
                         dic[tempS[i+temp+k-1]] += 1
                 count = dic[value]
                 if count >= temp:
+                    # 上次挑战成功了，下一次挑战难度加大，窗口也随之加大，把该加的窗口加上
                     for m in xrange(i+temp+k,i+temp+k+(count-temp+1)):
                         if m < len(tempS):
                             if tempS[m] not in dic:
@@ -199,35 +240,6 @@ class Solution(object):
 #                         index += 1
 #                     temp = count + 1
 #                     start = i + 1
-#                     label = True
-#                     break
-#         return min(temp - 1 + k, length)
-#==============================================================================
-#==============================================================================
-#     def characterReplacement(self, s, k):
-#         """
-#         :type s: str
-#         :type k: int
-#         :rtype: int
-#         """
-#         length = len(s)
-#         if length <= k + 1:
-#             return length
-#         tempS = s + k * "1"
-#         temp = 2
-#         start = 0
-#         label = True
-#         while label:
-#             label = False
-#             for i in xrange(start,length-temp+1):
-#                 count = 0
-#                 value = tempS[i]
-#                 for j in xrange(i,i+temp+k):
-#                     if tempS[j] == value:
-#                         count += 1
-#                 if count >= temp:
-#                     temp = count + 1
-#                     start = i
 #                     label = True
 #                     break
 #         return min(temp - 1 + k, length)
