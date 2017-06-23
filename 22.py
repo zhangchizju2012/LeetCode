@@ -1,6 +1,35 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
+Created on Fri Jun 23 13:58:30 2017
+
+@author: zhangchi
+"""
+# 复习时重写的版本
+class Solution(object):
+    def generateParenthesis(self, n):
+        """
+        :type n: int
+        :rtype: List[str]
+        """
+        self.result = []
+        self.helper(0,"",n)
+        return self.result
+        
+    def helper(self,stack, previous, n): # stack相等于(和)的个数差值，跟之前的其实差不多
+        if stack > 0:
+            if n > 0:
+                self.helper(stack+1, previous+'(', n-1)
+                self.helper(stack-1, previous+')', n)
+            else:
+                self.helper(stack-1, previous+')', n)
+        else:
+            if n > 0:
+                self.helper(stack+1, previous+'(', n-1)
+            else:
+                self.result.append(previous)
+
+"""
 Created on Mon May  8 22:32:39 2017
 
 @author: zhangchi
