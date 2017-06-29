@@ -33,9 +33,38 @@ public class BookTypeDao {
 	public ResultSet list(Connection con, BookType bookType) throws Exception{
 		StringBuffer sb = new StringBuffer("Select * from t_bookType");
 		if(StringUtil.isNotEmpty(bookType.getBookTypeName())){
-			sb.append(" and bookTypeName like '%"+bookType.getBookTypeName()+"%'");
+			sb.append(" and bookTypeName like '%"+bookType.getBookTypeName()+"%'");//这里的and是为了避免出现多个情况，where .. and ..,不过这里并没有出现这种情况
 		}
 		PreparedStatement pstmt = con.prepareStatement(sb.toString().replaceFirst("and", "where"));
 		return pstmt.executeQuery();
+	}
+	/**
+	 * 删除图书类别
+	 * @param con
+	 * @param bookType
+	 * @return
+	 * @throws Exception
+	 */
+	public int delete(Connection con, BookType bookType) throws Exception{
+		String sql = "DELETE FROM t_bookType WHERE id=?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setInt(1, bookType.getId());
+		return pstmt.executeUpdate();
+	}
+	
+	/**
+	 * 修改图书类别
+	 * @param con
+	 * @param bookType
+	 * @return
+	 * @throws Exception
+	 */
+	public int edit(Connection con, BookType bookType) throws Exception{
+		String sql = "UPDATE t_bookType SET bookTypeName=?, bookTypeDesc=? WHERE id=?";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1,bookType.getBookTypeName());
+		pstmt.setString(2, bookType.getBookTyepDesc());
+		pstmt.setInt(3, bookType.getId());
+		return pstmt.executeUpdate();	
 	}
 }

@@ -10,9 +10,6 @@ public class BookType {
 	private int id; //编号
 	private String bookTypeName; //名称
 	private String bookTyepDesc; //备注
-	public int getId() {
-		return id;
-	}
 	public BookType() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -21,6 +18,9 @@ public class BookType {
 		super();
 		this.bookTypeName = bookTypeName;
 		this.bookTyepDesc = bookTyepDesc;
+	}
+	public int getId() {
+		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
