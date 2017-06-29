@@ -136,6 +136,9 @@ public class LogOnFrm extends JFrame {
 					.addContainerGap(80, Short.MAX_VALUE))
 		);
 		contentPane.setLayout(gl_contentPane);
+		
+		//设置JFrame居中显示
+		this.setLocationRelativeTo(null);
 	}
 	/**
 	 * 登录事件处理
@@ -160,6 +163,8 @@ public class LogOnFrm extends JFrame {
 			User currentUser = userDao.login(con, user);
 			if(currentUser!=null){
 				JOptionPane.showMessageDialog(null, "登录成功！");
+				dispose();
+				new MainFrm().setVisible(true);
 			}else{
 				JOptionPane.showMessageDialog(null, "用户名或者密码错误！");
 			}
