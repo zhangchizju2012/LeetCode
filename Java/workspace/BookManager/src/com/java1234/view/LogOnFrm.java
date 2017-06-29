@@ -171,6 +171,13 @@ public class LogOnFrm extends JFrame {
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+		}finally {
+			try {
+				dbUtil.closeCon(con);
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 	}
 
