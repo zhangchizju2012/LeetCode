@@ -82,6 +82,13 @@ public class MainFrm extends JFrame {
 		menu.add(menu_3);
 		
 		JMenuItem menuItem_1 = new JMenuItem("图书添加");
+		menuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				BookAddInterFrm bookAddInterFrm = new BookAddInterFrm();
+				bookAddInterFrm.setVisible(true);
+				table.add(bookAddInterFrm);
+			}
+		});
 		menuItem_1.setIcon(new ImageIcon(MainFrm.class.getResource("/images/add.png")));
 		menu_3.add(menuItem_1);
 		
