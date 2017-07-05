@@ -8,6 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 
+</head>
+<body>
+
 <script type="text/javascript">
 	function resetValue(){
 		document.getElementById("userName").value = "";
@@ -32,10 +35,7 @@
 		pwd = "";
 	}
 %>
-
-</head>
-<body>
-
+<!-- on submit, send the form-data to a file named /userLogin.jsp  -->
 <form action="userLogin.jsp" method="get">
 	<table>
 		<tr>
