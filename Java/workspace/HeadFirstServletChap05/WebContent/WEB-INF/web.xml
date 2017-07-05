@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>HeadFirstServletChap05</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!--加下面东西的目的是让请求和处理类能够得到关联  -->
+  <servlet>
+  	<servlet-name>helloWorldServlet</servlet-name> <!-- 给servlet一个名字，跟后面的名字要相同 -->
+  	<servlet-class>com.java1234.web.HelloWorldServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>helloWorldServlet</servlet-name>
+  	<url-pattern>/helloWorld</url-pattern>
+  	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
+  	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
+  </servlet-mapping>
+  
+  <!--加下面东西的目的是让请求和处理类能够得到关联  -->
+  <servlet>
+  	<servlet-name>lifeServlet</servlet-name> <!-- 给servlet一个名字，跟后面的名字要相同 -->
+  	<servlet-class>com.java1234.web.LifeServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>lifeServlet</servlet-name>
+  	<url-pattern>/life</url-pattern>
+  	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
+  	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>RedirectServlet</servlet-name> <!-- 给servlet一个名字，跟后面的名字要相同 -->
+  	<servlet-class>com.java1234.web.RedirectServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>RedirectServlet</servlet-name>
+  	<url-pattern>/redirect</url-pattern>
+  	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
+  	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>ForwardServlet</servlet-name> <!-- 给servlet一个名字，跟后面的名字要相同 -->
+  	<servlet-class>com.java1234.web.ForwardServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>ForwardServlet</servlet-name>
+  	<url-pattern>/forward</url-pattern>
+  	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
+  	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
+  </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name> <!-- 给servlet一个名字，跟后面的名字要相同 -->
+  	<servlet-class>com.java1234.web.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
+  	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
+  </servlet-mapping>
+</web-app>
