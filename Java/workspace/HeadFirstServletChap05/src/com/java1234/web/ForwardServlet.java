@@ -30,7 +30,7 @@ public class ForwardServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//请求来了向页面输出东西（此处输出了html file）
 		request.setAttribute("requestKey", "request值");
-		HttpSession session = request.getSession(); //获取session
+		HttpSession session = request.getSession(); //获取session，注意session是隐藏在request里面的
 		session.setAttribute("sessionKey", "session值");
 		ServletContext application = this.getServletContext(); //获取application
 		application.setAttribute("applicationKey", "appplication值");

@@ -8,6 +8,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.jasper.tagplugins.jstl.core.Out;
 
@@ -57,13 +58,28 @@ public class LoginServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 		}
-		response.setCharacterEncoding("gbk");
-		PrintWriter out=response.getWriter();
-		if(resultUser!=null){
-			out.println("登录成功");
+		if(resultUser==null){
+			//为login.jsp里的value="${userName }"做准备
+			request.setAttribute("error", "用户名或密码错误");
+			request.setAttribute("userName", userName);
+			request.setAttribute("password", password);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else{
-			out.println("登录失败");
+			HttpSession session=request.getSession();
+			//request.setAttribute("resultUser", resultUser);
+			//如果设置到request里，这个attribute只能被main.jsp读取到，过滤器那里读取
+			//不到(实验过了，读取的到，所以看起来这里似乎可以用)
+			session.setAttribute("resultUser", resultUser);
+			response.sendRedirect("main.jsp");
+			//request.getRequestDispatcher("main.jsp").forward(request, response);
 		}
+//		response.setCharacterEncoding("gbk");
+//		PrintWriter out=response.getWriter();
+//		if(resultUser!=null){
+//			out.println("登录成功");
+//		}else{
+//			out.println("登录失败");
+//		}
 	}
 	
 }

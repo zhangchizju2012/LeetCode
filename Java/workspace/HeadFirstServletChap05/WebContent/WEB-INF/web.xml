@@ -71,4 +71,30 @@
   	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
   	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
   </servlet-mapping>
+  
+  <servlet>
+  	<servlet-name>LogoutServlet</servlet-name> <!-- 给servlet一个名字，跟后面的名字要相同 -->
+  	<servlet-class>com.java1234.web.LogoutServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LogoutServlet</servlet-name>
+  	<url-pattern>/logout</url-pattern>
+  	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
+  	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
+  </servlet-mapping>
+  
+  <filter>
+  	<filter-name>loginFilter</filter-name>
+  	<filter-class>com.java1234.filter.LoginFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>loginFilter</filter-name>
+  	<url-pattern>/*</url-pattern> <!-- 所有的请求都给过滤掉 -->
+  </filter-mapping>
+  
+  <listener>
+  	<listener-class>com.java1234.listener.SessionAttributeListener</listener-class>
+  </listener>
 </web-app>

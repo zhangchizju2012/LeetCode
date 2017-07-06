@@ -18,15 +18,16 @@
 <table>
 	<tr>
 		<td>用户名：</td>
-		<td><input type="text" name="userName"/></td>
+		<td><input type="text" name="userName" value="${userName }"/></td>
 	</tr>
 	<tr>
 		<td>密码：</td>
-		<td><input type="password" name="password"/></td>
+		<td><input type="password" name="password" value="${password }"/></td>
 	</tr>
 	<tr>
 		<td colspan="2"><input type="submit" value="提交"/></td>
 		<!-- colspan用来合并单元格 -->
+		<td><font color="red">${error }</font></td>
 	</tr>
 </table>
 </form>
