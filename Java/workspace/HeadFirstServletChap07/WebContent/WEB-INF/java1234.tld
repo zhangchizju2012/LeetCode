@@ -27,4 +27,40 @@
   			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
   		</attribute>
   	</tag>
+  	
+  	<tag>
+  		<name>iterate</name>
+  		<tag-class>
+  			com.java1234.tag.IterateTag
+  		</tag-class>
+  		<body-content>JSP</body-content>
+  		<attribute> <!-- 属性 -->
+  			<name>var</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  		<attribute> <!-- 属性 -->
+  			<name>items</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  	</tag>
+  	
+  	<tag>
+  		<name>iterate2</name>
+  		<tag-class>
+  			com.java1234.tag.IterateSimpleTag
+  		</tag-class>
+  		<body-content>scriptless</body-content>
+  		<attribute> <!-- 属性 -->
+  			<name>var</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  		<attribute> <!-- 属性 -->
+  			<name>items</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  	</tag>
 </taglib>
