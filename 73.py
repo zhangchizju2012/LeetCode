@@ -7,6 +7,7 @@ Created on Tue Jul 18 01:07:59 2017
 """
 
 class Solution(object):
+    # Could you devise a constant space solution?
     def setZeroes(self, matrix):
         """
         :type matrix: List[List[int]]
