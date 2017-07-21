@@ -26,7 +26,7 @@ public class Solution {
     	if(root==null){
     		return new ArrayList<>();
     	}
-    	Stack<List<Integer>> result = new Stack<>();
+    	List<List<Integer>> result = new ArrayList<>();
     	List<TreeNode> now = new ArrayList<>();
     	List<TreeNode> next = new ArrayList<>();
     	now.add(root);
@@ -41,15 +41,11 @@ public class Solution {
 	    			next.add(node.right);
 	    		}
 	    	}
-	    	result.push(value);
-	    	value = new ArrayList<Integer>();
+	    	result.add(0,value);
+	    	value = new ArrayList<>();
 	    	now = next;
 	    	next = new ArrayList<>();
     	}
-    	List<List<Integer>> finalResult = new ArrayList<>();
-    	while(result.isEmpty()==false){
-    		finalResult.add(result.pop());
-    	}
-        return finalResult;
+        return result;
     }
 }
