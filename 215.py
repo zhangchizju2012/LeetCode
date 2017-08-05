@@ -14,6 +14,18 @@ class Solution(object):
         :rtype: int
         """
         self.nums = nums
+        length = len(nums)
+        index = self.partition(0,length-1)
+        left = 0
+        right = length - 1
+        while True:
+            if index == k - 1:
+                return self.nums[index]
+            elif index < k - 1:
+                left = index+1
+            else:
+                right = index-1
+            index = self.partition(left,right)
         
     def partition(self, first, last):
         pivot = self.nums[first]
@@ -25,8 +37,18 @@ class Solution(object):
             while right >= left and self.nums[right] <= pivot:
                 right -= 1
             if left < right:
-                
-            
+                self.nums[left], self.nums[right] = self.nums[right], self.nums[left]
+                left += 1
+                right -= 1
+            else:
+                left -= 1
+                self.nums[left], self.nums[first] = self.nums[first], self.nums[left]
+                break
+        return left
+        
+s = Solution()
+for i in xrange(1,9):
+    print s.findKthLargest([6,5,5,4,4,4,3,2,1],i)
         
 
 
