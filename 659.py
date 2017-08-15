@@ -5,6 +5,9 @@ Created on Sat Aug 12 20:34:03 2017
 
 @author: zhangchi
 """
+# inspired by
+# https://discuss.leetcode.com/topic/99187/java-o-n-time-o-n-space
+# https://discuss.leetcode.com/topic/99200/python-o-n-straightforward-solution
 
 class Solution(object):
     def isPossible(self, nums):
