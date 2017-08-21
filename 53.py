@@ -12,9 +12,9 @@ class Solution(object):
         :type nums: List[int]
         :rtype: int
         """
-        result = [-float('inf')]
+        result = [-float('inf')] # 每个元素表示，以这个元素为终止，最大值是多少
         for item in nums:
-            if result[-1] < 0:
+            if result[-1] < 0: # 如果前面的是负的，最大值就是本身
                 result.append(item)
             else:
                 result.append(item+result[-1])
