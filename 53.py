@@ -6,41 +6,62 @@ Reviewed on Sun Aug 20 22:24:44 2017
 @author: zhangchi
 """
 class Solution(object):
-    # 分治
+    # DP
     def maxSubArray(self, nums):
         """
         :type nums: List[int]
         :rtype: int
         """
-        length = len(nums)
-        if length == 1:
-            return nums[0]
-        left = self.maxSubArray(nums[:length/2])
-        right = self.maxSubArray(nums[length/2:])
-        leftValue, leftCount = self.helper(nums[:length/2][::-1])
-        rightValue, rightCount = self.helper(nums[length/2:])
-        if leftCount == rightCount == 0:#至少得有一个数
-            middle = max(nums[length/2-1],nums[length/2])
-        else:
-            middle = leftValue + rightValue
-        return max(left,right,middle)
+        result = [-float('inf')]
+        for item in nums:
+            if result[-1] < 0:
+                result.append(item)
+            else:
+                result.append(item+result[-1])
+        return max(result)
         
-    def helper(self,nums):
-        # 计算含有一端时的最大值
-        count = 0
-        value = 0
-        maxValue = -float('inf')
-        for index, item in enumerate(nums):
-            value += item
-            if value > maxValue:
-                maxValue = value
-                count = index + 1
-        return maxValue, count
-
 
 S = Solution()
 nums = [-2,1,-3,4,-1,2,1,-5,4]
 print S.maxSubArray(nums)
+# =============================================================================
+# class Solution(object):
+#     # 分治
+#     def maxSubArray(self, nums):
+#         """
+#         :type nums: List[int]
+#         :rtype: int
+#         """
+#         length = len(nums)
+#         if length == 1:
+#             return nums[0]
+#         left = self.maxSubArray(nums[:length/2])
+#         right = self.maxSubArray(nums[length/2:])
+#         leftValue, leftCount = self.helper(nums[:length/2][::-1])
+#         rightValue, rightCount = self.helper(nums[length/2:])
+#         if leftCount == rightCount == 0:#至少得有一个数
+#             middle = max(nums[length/2-1],nums[length/2])
+#         else:
+#             middle = leftValue + rightValue
+#         return max(left,right,middle)
+#         
+#     def helper(self,nums):
+#         # 计算含有一端时的最大值
+#         count = 0
+#         value = 0
+#         maxValue = -float('inf')
+#         for index, item in enumerate(nums):
+#             value += item
+#             if value > maxValue:
+#                 maxValue = value
+#                 count = index + 1
+#         return maxValue, count
+# 
+# 
+# S = Solution()
+# nums = [-2,1,-3,4,-1,2,1,-5,4]
+# print S.maxSubArray(nums)
+# =============================================================================
 
 """
 Created on Fri Dec 16 20:56:53 2016
