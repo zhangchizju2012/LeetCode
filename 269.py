@@ -27,6 +27,7 @@ class Solution(object):
             if len(each) == 1: # 可能会有多余的元素，先放在left里
                 left.add(each[0])
             else:
+                # 相当于构建topological sort的前后顺序
                 for i in xrange(len(each)-1):
                     if each[i] not in future:
                         future[each[i]] = set([each[i+1]])
@@ -43,6 +44,7 @@ class Solution(object):
             temp = set()
             for item in noRequireSet:
                 returnResult += item
+                # 满足要求的及时pop走，为line56做准备
                 if item in future: # 可能已经被pop走了
                     for popitem in future[item]:
                         previous[popitem].remove(item)
