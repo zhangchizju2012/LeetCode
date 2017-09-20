@@ -21,3 +21,18 @@ Created on Mon Sep 18 00:45:06 2017
     这道题没什么意义 https://discuss.leetcode.com/topic/31602/this-problem-is-meanless
     实际上应该问的是用constant memory （但是不要直接去转str）
     这个思路不错：去掉原式子的后一半，然后用后一半去建新的，比较新的和原式子的前一半是否一致，可以避免overflow问题
+
+#0919
+11. 穷举是n^2复杂度，为了达到n复杂度，最关键的是，不能把最终答案的那种给漏了，别的漏了都无所谓
+    采用two pointers的思路，pointer移动的策略是，所对应的值小的pointer进行移动，大的不移动
+    证明这种策略不会错过答案：
+    假设两个pointer中的一个先抵达了结果中矮的那个，另一个pointer对应的杆子肯定矮一些，且在抵达结果中高的那个之前，不会碰到比结果中矮的那个要高的棍子，否则这一对就是结果了
+    假设两个pointer中的一个先抵达了结果中高的那个，另一个pointer对应的杆子对应的杆子肯定比结果中矮的那个要矮，且在抵达结果中矮的那个之前，碰到的棍子都比那个矮的要矮
+14. 简单，扫描所有string,找最小长度，然后一个字符一个字符扫描过去
+15. 基本思路是一个一个扫描，剩下的按照2sum来，这样复杂度是n^2
+    然后可以先sort一下，然后超过三个的没有意义，然后其实sort了之后，对于剩下的，也可以考虑用two pointer
+    来做，小了一个pointer移动，大了另一个pointer移动（像google interview里的）
+16. sort, 一个for loop, 后面two pointers，像上题一样
+17. it can be solved recursively
+    也可以不recursive, for loop 一个一个扫描，搞个result, 搞了temp, result储存在第i个时的结果，temp储存下一个结果，不断用temp更新result
+19. 两个指针，第二个pointer在第一个移动n步之后开始移动
