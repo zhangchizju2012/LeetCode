@@ -36,3 +36,11 @@ Created on Mon Sep 18 00:45:06 2017
 17. it can be solved recursively
     也可以不recursive, for loop 一个一个扫描，搞个result, 搞了temp, result储存在第i个时的结果，temp储存下一个结果，不断用temp更新result
 19. 两个指针，第二个pointer在第一个移动n步之后开始移动
+
+#0920
+20. stack 简单
+21. 简单，注意linked list的用法
+22. bfs/dfs ? 应该是dfs，能走的都先走掉 （又重写了一遍）
+23. 再复习，用heapq
+24. 创建first, second, third 分别对应后续三个需要处理的node（手写了代码）
+25. <Reverse Nodes in k-Group> 类似24，但是放在list里，这样就可以扫描很多个了 (但是这样的space complexity会与k有关)
