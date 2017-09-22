@@ -44,3 +44,13 @@ Created on Mon Sep 18 00:45:06 2017
 23. 再复习，用heapq
 24. 创建first, second, third 分别对应后续三个需要处理的node（手写了代码）
 25. <Reverse Nodes in k-Group> 类似24，但是放在list里，这样就可以扫描很多个了 (但是这样的space complexity会与k有关)
+
+#0921
+26. <Remove Duplicates from Sorted Array> 简单，重新手写了代码
+27. <Remove Element> 简单，像26
+28. 弱智，the length of ... is not necessarily 1
+30. <Substring with Concatenation of All Words> 再复习
+    最基本思路：每个单词长度是a,总共b个单词，然后就有个长度为ab的窗口，去扫描整个string,然后与list里的内容比较
+    改进：但是这样的话，很多进行了重复运算，不好。对于每个string, **********，(假设单词长度为3）可以
+    这样划分：***|***|***|*，*|***|***|***|,然后对每个部分去看是否存在于dict里，这样可以避免重复运算 （可以做一下）
+亚麻oa 3题
