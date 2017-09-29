@@ -6,13 +6,14 @@
 package amazon;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author zhangchi
  * 2017年9月21日 下午3:53:06
  */
 public class WindowSum {
-	public ArrayList<Integer> getWindowSum(ArrayList<Integer> list, int k){
+	public ArrayList<Integer> getWindowSum(List<Integer> list, int k){
 		if(k>list.size()){
 			return null;
 		}
