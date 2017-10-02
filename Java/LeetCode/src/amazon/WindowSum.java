@@ -18,6 +18,7 @@ public class WindowSum {
 			return null;
 		}
 		ArrayList<Integer> result = new ArrayList<>();
+		if (list == null || list.size() == 0 || k <= 0) return result;
 		int value = 0;
 		for(int i=0;i<k;i++){
 			value += list.get(i);

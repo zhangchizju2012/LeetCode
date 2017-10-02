@@ -14,6 +14,14 @@ import java.util.PriorityQueue;
 class Point {
 	float x;
 	float y;
+	/**
+	 * 
+	 */
+	public Point(float a, float b) {
+		// TODO Auto-generated constructor stub
+		x = a;
+		y = b;
+	}
 }
 
 public class GetKClosestPoint {
