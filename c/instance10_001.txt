@@ -1,0 +1,30 @@
+# gcc -Wall -std=c99 -o run textReadAndProcess.c 
+# ./run -i instance10_001.txt -o output.txt
+#instance10_001.txt
+#area [0, MAX_X] x [0, MAX_Y]
+100
+
+100
+#number of points NUM_PT
+10
+#coordinates
+0	0
+0	90
+
+
+
+
+
+70	100
+100	50
+
+
+
+
+30	30
+30	70
+70	70
+70	30
+50	50
+45	0
+#end of instance
