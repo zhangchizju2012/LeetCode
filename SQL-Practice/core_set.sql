@@ -1,4 +1,4 @@
--- Questions: 
+-- Questions:
 -- https://lagunita.stanford.edu/courses/Engineering/db/2014_1/courseware/ch-sql/seq-exercise-sql_movie_query_core-pastdue/
 
 -- Q1
@@ -6,7 +6,7 @@ SELECT title FROM Movie WHERE director = 'Steven Spielberg';
 
 -- Q2
 SELECT DISTINCT Movie.year
-FROM Movie 
+FROM Movie
 INNER JOIN Rating On Movie.mID = Rating.mID
 WHERE Rating.stars = 4 OR Rating.stars = 5
 ORDER BY Movie.year ASC;
@@ -26,7 +26,7 @@ WHERE Rating.stars IS NULL;
 -- Solution:
 select title
 from Movie
-where mID not in (select mID 
+where mID not in (select mID
                   from Rating)
 ;
 
@@ -55,7 +55,7 @@ where Movie.mID = Rating.mID and Reviewer.rID = Rating.rID
 order by name, title, stars;
 
 -- Q6
--- For all cases where the same reviewer rated the same movie twice and gave it a higher rating the second time, return the reviewer's name and the title of the movie. 
+-- For all cases where the same reviewer rated the same movie twice and gave it a higher rating the second time, return the reviewer's name and the title of the movie.
 
 -- SELECT A.rID, A.mID
 -- FROM Rating A, Rating B
@@ -71,7 +71,7 @@ WHERE A.rID = B.rID AND A.mID = B.mID AND A.ratingDate < B.ratingDate AND A.star
 select name, title
 from Movie, Reviewer, (select R1.rID, R1.mID
   from Rating R1, Rating R2
-  where R1.rID = R2.rID 
+  where R1.rID = R2.rID
   and R1.mID = R2.mID
   and R1.stars < R2.stars
   and R1.ratingDate < R2.ratingDate) C
@@ -88,6 +88,16 @@ FROM Rating A, Rating B
 WHERE A.mID = B.mID AND A.stars < B.stars) Data
 WHERE Movie.mID = Data.mID
 ORDER BY title
+
+-- 0924 UPDATE
+-- find maximum value items according a attribute
+
+SELECT Movie.title, C.stars
+FROM Movie, (SELECT mID, MAX(stars) AS stars
+FROM Rating
+GROUP BY mID) C
+WHERE Movie.mID = C.mID
+ORDER BY Movie.title ASC
 
 -- Q8
 SELECT title, AVG(stars) as stars
@@ -112,3 +122,21 @@ From Reviewer, (SELECT rID, COUNT(rID) as number
 				FROM Rating
 				Group By rID) Data
 WHERE number >= 3 AND Reviewer.rID = Data.rID
+
+
+-- 其他
+-- 找到所属国家为USA，且所对应ID超过该国家所有Customer ID平均值的Customer
+-- 源自：找到所有上过291这门课，且分数超过平均分的学生
+SELECT CustomerID
+FROM Customers
+WHERE Country = "USA" AND CustomerID > (SELECT Data.A 
+          								FROM (SELECT Country, AVG(CustomerID) AS A
+                                              FROM Customers
+                                              GROUP BY Country) Data
+                                        WHERE Country = "USA")
+
+SELECT CustomerID
+FROM Customers
+WHERE Country = "USA" AND CustomerID > (SELECT AVG(CustomerID)
+                                        FROM Customers
+                                        WHERE Country = "USA")
