@@ -127,6 +127,7 @@ WHERE number >= 3 AND Reviewer.rID = Data.rID
 -- 其他
 -- 找到所属国家为USA，且所对应ID超过该国家所有Customer ID平均值的Customer
 -- 源自：找到所有上过291这门课，且分数超过平均分的学生
+
 SELECT CustomerID
 FROM Customers
 WHERE Country = "USA" AND CustomerID > (SELECT Data.A 
