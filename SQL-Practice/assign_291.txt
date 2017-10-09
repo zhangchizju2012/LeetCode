@@ -1,0 +1,78 @@
+CMPUT 291 - Introduction to File and Database Management
+Fall 2017
+
+Assignment Two
+(individual assignment)
+Due date: Oct 11 at 5pm (submission details)
+
+Clarifications:
+
+No clarification will be posted here after 5pm on Oct 10th.
+Oct 4: Your query for Q4 will only return stores that have some unique products.
+Oct 7: Here is a marking rubric for this assignment.
+Introduction
+
+The goal of this assignment is to improve your skills of writing declarative queries on a relational database, in general, and also to improve your fluency in SQL (and SQLite).
+
+You have been provided with the following relational schema.
+
+stores(sid, name, phone, address)
+categories(cat, name)
+products(pid, name, unit, cat)
+carries(sid, pid, qty, uprice)
+customers(cid, name, address)
+orders(oid, cid, odate, address)
+olines(oid, sid, pid, qty, uprice)
+deliveries(trackingno, oid, pickUpTime, dropOffTime)
+The tables are derived from the specification of Assignment 1 and the names of the tables and columns should give the semantics, except minor differences which are explicit in table definitions, insert statements or queries.
+Creating the database
+
+Using the SQL statements provided, create the above tables in SQLite3 on Lab machines with some data. Here is a small initial data to get you started.
+(90 marks) Queries
+
+Write down the following queries in SQL and run them in SQLite3 over the database created. You will be writing ONE SQL statement for every query (here One SQL statement starts with a SELECT and ends with a semicolon but may include multiple select statements combined in the form of subqueries and/or using set operations). Your SQL queries for questions 1-3 cannot use any of aggregation, grouping, or nesting.
+
+Find cid of cutomers who have not ordered a product from the dairy category.
+Find oid of orders that include at least two products from the dairy category and those two products are ordered from two different stores.
+Find the tracking number of all deliveries that include an order placed by a customer named John Doe, and are picked up today but are not dropped off (i.e. the drop off time is null). Hint: Check out the date and time functions in SQLite.
+Find for each store the number of products that are unique to the store (i.e. no other store carries the same product). The result includes the sid of stores and the number of qualifying products.
+Find cid of customers and sid of stores such that at least 50% of the customer orders include a product from that store.
+Find for each category, the number of products in that category, the number of stores that carry a product in that category, and the number of orders that have a product in that category. Your result should have zero on the relevant columns when a category has no product, or no store carries products in a category or no order is made for products in a category. The result includes the cat of categories with the computed quantities. Hint: you may find outer join useful.
+Find pid and name of 5 top selling-products (i.e. products included in the largest number of orders) and the number of stores that carry them. Hint: check out limit in sqlite.
+Find cid of customers who have all their orders with one store and that store is not Walmart.
+Create a view called goodprices with columns pid, sid, name, qty and uprice; the view will include for each product, the id and the name of the store(s) that carries the proudct with a quantity larger than zero and the least price among all stores. Include for each product and store, the pid of the product, the sid and name of the store, and the quantity, and the unit price.
+Using the view created in the previous question, find cid of bargain finders. A customer is a bargain finder if s/he has ordered some products within the past 7 days but none of his/her orders include a product with a price higher than the minimum product price that is available.
+
+(upto 5 bonus marks for the first 3 people ) Preparing test data
+
+Written queries should be tested for correctness and bug fixes, very much like programs written in any programming language. For testing, you need to have enough data in your tables such that all your queries are meaningful and non-trivial (e.g. the returned answers are not empty). You are encouraged to share your data with your classmates or use data prepared by them. To make this collaboration happen, there will be up to 5 bonus marks (at the instructor's discretion) to the first 3 people who prepare a test data and share it with the rest of the class. If you are sharing your test data, please post it to the course discussion forum. Put all your insert statements in a file called a2-data.sql. Make sure to put down your name, email and a date when it is published or revised at the beginning of the file as a comment line (e.g. -- Data prepared by <firstname lastname>, <email address>, and published on <date>). If you are using data prepared by someone else, leave the identification line unchanged.
+(10 marks) Testing and report
+
+Starting from scratch, create your database as
+sqlite3   a2.db   <a2-tables.sql
+and populate your tables using data file a2-data.sql (prepared in the previous step) as
+sqlite3   a2.db   <a2-data.sql
+Put all your SQL queries in a file named a2-queries.sql; Add the following line at the beginning of the file
+.echo on
+and the following line before each SQL query (replacing X with the query number).
+--Question X
+Run your queries on your data file as
+sqlite3   a2.db   <a2-queries.sql >a2-script.txt
+You will be submitting both a2-data.sql and a2-script.txt electronically as described in the instructions for submissions. 
+Instructions for Submissions
+
+We will make use of some automated tools in testing your queries. Thus it is important that you follow the following instructions closely.
+
+Your queries will be tested under a TA account with the provided tables. Do not use any table or column names other than those provided.
+Write each query in a separate file. Your solution must have one SQL statement for each query. In other words, you cannot use views or temporary tables unless you are explicitly asked to do so. The first query must be saved in a file named 1.sql, the second query in a file named 2.sql, and so on until the tenth query, which is to be saved in a file called 10.sql (the names are important!).
+The first line of each query file must have the command:
+.print Question X - CCID
+where X is the number of the query and CCID is your CCID. For example, the first line of the third query file for the user with ccid 'drafiei' will be:
+.print Question 3 - drafiei
+The rest of each file must contain the SQL query you are submitting and nothing else.
+Include with your submission a README.txt file that has your name, unix id, lab section, and the list of people you collaborated with (as much as it is allowed within the course policy) or the line "I declare that I did not collaborate with anyone in this assignment". A submission without a README.txt file or with missing information will lose 5% of the total mark.
+Bundle all your queries, insert statements (a2-data.sql) and scripts (a2-script.txt) into a single tarfile by executing the Unix command (everything should be on one line):
+tar -czf a2.tgz README.txt a2-data.sql a2-script.txt 1.sql 2.sql 3.sql 4.sql 5.sql 6.sql 7.sql 8.sql 9.sql 10.sql
+
+Submit the file a2.tgz at the submission page after logging into eclass.
+Eclass does not support versioning (unfortunately) and each new submission replaces your previous one. This makes last minute submissions somewhat risky. Avoid last minute submissions as much as you can, and check your submissions after an upload to make sure the right content is uploaded. A common mistake is to use a wrong tar command and submit a corrupt file.
