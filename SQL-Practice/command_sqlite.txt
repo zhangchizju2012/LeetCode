@@ -1,0 +1,70 @@
+Last login: Sun Oct  8 16:13:48 on ttys001
+wangmingyuedeMacBook-Air:~ wangmingyue$ cd Desktop/cmput291/
+wangmingyuedeMacBook-Air:cmput291 wangmingyue$ ls
+ create table ass1.pages	QL-relalgebra.pdf
+1.Introduction.pdf		ass2.db
+2.Relational.pdf		ass2.sql
+3.ER.pdf			key.docx
+4.ER2Rel.pdf
+wangmingyuedeMacBook-Air:cmput291 wangmingyue$ ls
+ create table ass1.pages	4.ER2Rel.pdf
+1.Introduction.pdf		QL-relalgebra.pdf
+2.Relational.pdf		ass2.sql
+3.ER.pdf			key.docx
+wangmingyuedeMacBook-Air:cmput291 wangmingyue$ sqlite3 ass2.db
+-- Loading resources from /Users/wangmingyue/.sqliterc
+
+SQLite version 3.13.0 2016-05-18 10:57:30
+Enter ".help" for usage hints.
+sqlite> .read ass2.sql 
+
+sqlite> select * from stores;
+10|Canadian Tire|780-111-2222|Edmonton South Common
+20|Canadian Superstore|780-111-3333|Edmonton South Common
+sqlite> 
+
+
+
+
+
+
+
+
+Q1) c2, c3, c4, c6
+
+Q2) 1
+
+Q3) 1002
+
+Q4) 
+
+1|4
+
+2|8
+
+3|4
+
+4|4
+
+5|4
+
+6|4
+
+7|3
+
+Q7) (note, I haven't done Q5&Q6 yet)
+
+As well, it's worth noting that the data doesn't have very many duplicate items being purchased, making it a little inadequate for testing. A potential output is:
+
+
+p1|4L milk 1%|3
+
+p37|vitamins|3
+
+p8|chicken|2
+
+p10|lamb|1
+
+p11|broccoli|1
+
+Q8)c3, c6
