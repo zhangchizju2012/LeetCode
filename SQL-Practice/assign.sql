@@ -145,7 +145,6 @@ LEFT JOIN products ON categories.cat = products.cat;
 
 
 
-
 SELECT categories.cat,COUNT(DISTINCT products.name),COUNT(DISTINCT carries.sid),COUNT(DISTINCT oid)
 FROM products, categories
 LEFT OUTER JOIN olines using (pid)
