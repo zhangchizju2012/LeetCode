@@ -1,0 +1,7 @@
+127.0.0.1 - - [07/Jul/2017:12:06:15 -0600] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [07/Jul/2017:12:06:16 -0600] "GET /HeadFirstCSS/chap01/sec02/demo01.html HTTP/1.1" 200 165
+0:0:0:0:0:0:0:1 - - [07/Jul/2017:12:06:26 -0600] "GET /HeadFirstCSS/chap01/sec02/demo01.html HTTP/1.1" 200 164
+0:0:0:0:0:0:0:1 - - [07/Jul/2017:12:06:36 -0600] "GET /HeadFirstCSS/chap01/sec02/demo01.html HTTP/1.1" 200 170
+0:0:0:0:0:0:0:1 - - [07/Jul/2017:12:06:47 -0600] "GET /HeadFirstCSS/chap01/sec02/demo01.html HTTP/1.1" 200 166
+127.0.0.1 - - [07/Jul/2017:13:19:39 -0600] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [07/Jul/2017:13:19:40 -0600] "GET /HeadFirstCSS/chap01/sec02/demo01.html HTTP/1.1" 200 243

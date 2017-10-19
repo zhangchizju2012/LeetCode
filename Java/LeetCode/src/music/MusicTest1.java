@@ -9,12 +9,25 @@ import javax.sound.midi.Track;
 
 public class MusicTest1 {
 	public static void main(String[] args){
+		if(args.length < 2){
+			System.out.println("args not satisfied");
+		}else{
+			int instrument = Integer.parseInt(args[0]);
+			int note = Integer.parseInt(args[1]);
+			System.out.println(instrument);
+			System.out.println(note);
+		}
 		try{
 			Sequencer player = MidiSystem.getSequencer();
 			player.open();
 			
 			Sequence seq = new Sequence(Sequence.PPQ, 4);
 			Track track = seq.createTrack();
+			
+			ShortMessage start = new ShortMessage();
+			start.setMessage(192, 1, 44, 0);
+			MidiEvent changeInstrument = new MidiEvent(start, 1);
+			track.add(changeInstrument);
 			
 			ShortMessage a = new ShortMessage();
 			a.setMessage(144, 1, 44, 100);

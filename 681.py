@@ -24,7 +24,7 @@ class Solution(object):
                     for i3 in digList:
                         for i4 in digList:
                             right = i3 * 10 + i4
-                            if 0 <= right < 60:
+                            if 0 <= right < 60:4
                                 candidate.append(left*100+right)
         candidate.sort()
         origin = int(time[:2]) * 100 + int(time[-2:])

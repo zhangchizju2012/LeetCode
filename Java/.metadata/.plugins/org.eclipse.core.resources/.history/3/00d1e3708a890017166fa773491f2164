@@ -1,0 +1,71 @@
+package test;
+
+//import java.util.AbstractMap;
+//import java.util.HashMap;
+//import java.util.LinkedHashMap;
+//import java.util.TreeMap;
+//
+//public class test {
+//	public static void insertAndPrint(AbstractMap<String, String> map) {
+//		String[] array = {"ab","aa","a"};
+//		for (String x : array) {
+//			map.put(x, x);
+//		}
+//		
+//		for (String k : map.keySet()) {
+//			System.out.print(k + ", ");
+//		}
+//	}
+//	
+//	public static void main(String[] args) {
+//		TreeMap<String, String> treeMap = new TreeMap<String, String>();
+//		HashMap<String, String> hashMap = new HashMap<String, String>();
+//		LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<String, String>();
+//		
+//		System.out.println("\nHashMap - Arbitrary Order:");
+//		insertAndPrint(hashMap);
+//		
+//		System.out.println("\nLinkedHashMap - Insertion Order:");
+//		insertAndPrint(linkedHashMap);
+//
+//		System.out.println("\nTreeMap - Natural Order:");
+//		insertAndPrint(treeMap);
+//	}
+//
+//}
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class test {
+	static abstract class Animal{
+        public static final String  Hello_world="Hello World";
+        public static int a=1;
+        static{
+            System.out.println("animal init");
+        }
+ 
+    };
+    static  class Tiger extends Animal{};
+    static  class Bear extends Animal{};
+ 
+    public void sayHello(Animal animal){
+        System.out.println("hello animal");
+    }
+    public void sayHello(Tiger tiger){
+        System.out.println("hello tiger");
+    }
+    public void sayHello(Bear bear){
+        System.out.println("hello bear");
+    }
+ 
+    public static void main(String[] args) {
+        System.out.println(Animal.Hello_world);
+        System.out.println(Animal.1);
+        Animal tiger = new Tiger();
+        Animal bear= new Bear();
+        TestOverLoad testOverLoad = new TestOverLoad();
+        testOverLoad.sayHello(tiger);
+        testOverLoad.sayHello(bear);
+    }
+}

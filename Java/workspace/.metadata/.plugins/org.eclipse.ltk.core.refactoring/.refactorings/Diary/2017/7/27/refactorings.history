@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Encapsulate field &apos;com.java1234.model.User.imageName&apos; in &apos;com.java1234.model.User&apos;&#x0A;- Original project: &apos;Diary&apos;&#x0A;- Original element: &apos;com.java1234.model.User.imageName&apos;&#x0A;- Getter method name: &apos;getImageName&apos;&#x0A;- Setter method name: &apos;setImageName&apos;&#x0A;- Field visibility: &apos;public&apos;&#x0A;- Use getter and setter methods in declaring type" comments="false" declaring="true" description="Encapsulate field &apos;imageName&apos;" flags="589830" getter="getImageName" id="org.eclipse.jdt.ui.self.encapsulate" input="/src&lt;com.java1234.model{User.java[User^imageName" insertion="9" setter="setImageName" stamp="1499213273451" version="1.0" visibility="1"/>
+</session>

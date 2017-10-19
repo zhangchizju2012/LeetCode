@@ -1,0 +1,8 @@
+package ood79;
+
+public class TestArray {
+	public static void main(String[] args){
+		CircularArray<Integer> array = new CircularArray<>(5);
+		System.out.println(array);
+	}
+}

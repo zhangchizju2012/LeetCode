@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<taglib xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd"
+    version="2.1">
+    <tlib-version>1.0</tlib-version>
+    <short-name>java1234Tag</short-name> <!-- 这个名字随便选 -->
+    
+  	<tag>
+  		<name>helloWorld</name>
+  		<tag-class>
+  			com.java1234.tag.HelloWorldTag
+  		</tag-class>
+  		<body-content>empty</body-content> 
+  	</tag>
+  	
+  	<tag>
+  		<name>helloWorld2</name>
+  		<tag-class>
+  			com.java1234.tag.HelloWorldTag2
+  		</tag-class>
+  		<body-content>empty</body-content>
+  		<attribute> <!-- 属性 -->
+  			<name>name</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  	</tag>
+  	
+  	<tag>
+  		<name>iterate</name>
+  		<tag-class>
+  			com.java1234.tag.IterateTag
+  		</tag-class>
+  		<body-content>JSP</body-content>
+  		<attribute> <!-- 属性 -->
+  			<name>var</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  		<attribute> <!-- 属性 -->
+  			<name>items</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  	</tag>
+  	
+  	<tag>
+  		<name>iterate2</name>
+  		<tag-class>
+  			com.java1234.tag.IterateSimpleTag
+  		</tag-class>
+  		<body-content>scriptless</body-content>
+  		<attribute> <!-- 属性 -->
+  			<name>var</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  		<attribute> <!-- 属性 -->
+  			<name>items</name> <!-- 属性名字，跟com.java1234.tag.HelloWorldTag2里的属性名字对应 -->
+  			<required>true</required> <!-- 该属性是否必须要写 -->
+  			<rtexprvalue>true</rtexprvalue> <!-- 是否支持EL表达式传值 -->
+  		</attribute>
+  	</tag>
+</taglib>

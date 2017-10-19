@@ -27,7 +27,7 @@ class Solution(object):
                     index = tempS.find(item)
         temp.sort(key=lambda x:x[0])
         if len(temp) > 0:
-            #将能合并的东西合并
+            #将能合并的东西合并，跟57一致，先写的616再写的57
             result = [temp[0]]
             for i in xrange(1,len(temp)):
                 a,b = temp[i]

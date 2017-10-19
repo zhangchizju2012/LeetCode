@@ -44,6 +44,6 @@ class Solution(object):
             return self.dic[length]
                 
 s = Solution()
-print s.numDecodings("110")
+print s.numDecodings("1111111")
 # 100; 110
             

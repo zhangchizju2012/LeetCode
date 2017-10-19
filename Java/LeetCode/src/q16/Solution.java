@@ -17,6 +17,8 @@ import java.util.Arrays;
  * @author zhangchi
  * 2017年7月28日 下午2:00:54
  */
+
+// 还需要复习，只要完成n^2复杂度就可以了
 public class Solution {
 	public static void main(String[] args){
 		Solution solution = new Solution();

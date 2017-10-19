@@ -1,0 +1,62 @@
+package test;
+
+//import java.util.AbstractMap;
+//import java.util.HashMap;
+//import java.util.LinkedHashMap;
+//import java.util.TreeMap;
+//
+//public class test {
+//	public static void insertAndPrint(AbstractMap<String, String> map) {
+//		String[] array = {"ab","aa","a"};
+//		for (String x : array) {
+//			map.put(x, x);
+//		}
+//		
+//		for (String k : map.keySet()) {
+//			System.out.print(k + ", ");
+//		}
+//	}
+//	
+//	public static void main(String[] args) {
+//		TreeMap<String, String> treeMap = new TreeMap<String, String>();
+//		HashMap<String, String> hashMap = new HashMap<String, String>();
+//		LinkedHashMap<String, String> linkedHashMap = new LinkedHashMap<String, String>();
+//		
+//		System.out.println("\nHashMap - Arbitrary Order:");
+//		insertAndPrint(hashMap);
+//		
+//		System.out.println("\nLinkedHashMap - Insertion Order:");
+//		insertAndPrint(linkedHashMap);
+//
+//		System.out.println("\nTreeMap - Natural Order:");
+//		insertAndPrint(treeMap);
+//	}
+//
+//}
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class test {
+	private static List<String> list =new ArrayList<String>();
+	 
+    private static final String TMALL="tmall";
+ 
+    private static final String TB="taobao";
+ 
+    public static void main(String[] args) {
+        for (int i=0;i<10;i++){
+            if(i%2==0||i%3==0) {
+                list.add(TB);
+            }else{
+                list.add(TMALL);
+            }
+        }
+        for(int i=0;i<list.size();i++){
+            if(TB.equals(list.get(i))){
+                list.remove(TB);
+            }
+        }
+        System.out.println(list);
+    }
+}

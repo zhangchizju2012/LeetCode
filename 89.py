@@ -23,5 +23,5 @@ class Solution(object):
         return result
         
 s = Solution()
-print s.grayCode(1)
+print s.grayCode(5)
             

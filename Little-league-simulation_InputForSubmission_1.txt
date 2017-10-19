@@ -1,0 +1,1 @@
+((FB, F), (C, S), (FB, F), (FB, F), (C, F), (C, S), (C, F), (FB, F), (C, F), (C, F), (C, F), (C, F), (C, S), (FB, S), (FB, S), (C, F), (C, F), (FB, S), (C, S), (C, S), (C, S), (FB, S), (C, F), (FB, S))

@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MiniMusicPlayer {
-	MyDrawPanel mp;//it's important to be put outside
+	MyDrawPanel mp;// it's important to be put here
 	public static void main(String[] args){
 		MiniMusicPlayer mmp = new MiniMusicPlayer();
 		mmp.go();
@@ -20,9 +20,10 @@ public class MiniMusicPlayer {
 			Sequence seq = new Sequence(Sequence.PPQ, 4);
 			
 			int[] eventIWant = {127};// 这个参数还没搞懂
+			// 监听非GUI事件
 			player.addControllerEventListener(mp, eventIWant);
-			//player是监听的，一旦监听到满足条件的行为就会导致：action真正执行
-			// see line 8, can't be new MyDrawPanel();
+			// player是监听的，一旦监听到满足条件的行为就会导致：MyDrawPanel中的action（repaint）真正执行，调用controlChange
+			// see line 8, can't be player.addControllerEventListener(new MyDrawPanel(), eventIWant);
 			// 明天再对比这个位置的mp和SimpleGUI.java中同样位置的new Button1Listen()，搞清楚为什么
 			Track track = seq.createTrack();
 			
@@ -44,6 +45,7 @@ public class MiniMusicPlayer {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		mp = new MyDrawPanel();// see line 8, can't be MyDrawPanel mp = new MyDrawPanel()
+		// 这个地方也会画一次，就算没有监听，也会显示图片（但是不监听的话图片就不会变了）
 		frame.getContentPane().add(mp);
 		
 		frame.setSize(300, 300);
@@ -80,7 +82,7 @@ public class MiniMusicPlayer {
 		@Override
 		public void controlChange(ShortMessage event) {
 			// TODO Auto-generated method stub
-			repaint();
+			repaint();// 搞清楚这里repaint就能画的机制是怎么样的
 		}
 		
 	}

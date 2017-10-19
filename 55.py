@@ -8,6 +8,9 @@ Edited on Sat May 6 8:28:16 2017
 """
 
 class Solution(object):
+    # 这个还不算是dp，有点贪婪算法的感觉在，但是还不够优化
+    # 参考jiuzhang的两种算法，一种是DP, 一种是贪婪算法 （贪心不会没事，公司不要求）
+    # 不过我这样可以轻松拓展到第45题（九章的DP也可以轻松转变成45，贪心的没看）
     def canJump(self, nums):
         """
         :type nums: List[int]

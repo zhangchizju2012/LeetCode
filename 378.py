@@ -47,6 +47,7 @@ class Solution(object):
         :rtype: int
         """
         # This is the fastest and right
+        # 其实就是靠heapq来排序
         n = len(matrix)
         point = [0] * n
         result = []
@@ -102,5 +103,5 @@ a = [[1,1,1,1,1,14,17],
      [7,15,19,21,22,24,31],
      [12,16,22,22,24,25,34],
      [16,21,23,26,26,30,37]]
-print s.kthSmallest(a,49)
+print s.kthSmallest2(a,49)
         

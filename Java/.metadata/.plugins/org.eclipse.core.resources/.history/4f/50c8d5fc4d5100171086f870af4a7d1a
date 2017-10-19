@@ -1,0 +1,10 @@
+package ood79;
+
+public class CircularArray <T> {
+	T[] array;
+	public CircularArray(int length) {
+		// TODO Auto-generated constructor stub
+		// array = new T[length]; // cannot create a generic array of T
+	}
+	
+}

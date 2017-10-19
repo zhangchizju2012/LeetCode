@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<servers>
+  <server auto-publish-setting="2" auto-publish-time="1" configuration-id="/Servers/Tomcat v8.0 Server at localhost-config" deployDir="wtpwebapps" hostname="localhost" id="Tomcat v8.0 Server at localhost" name="Tomcat v8.0 Server at localhost" runtime-id="Apache Tomcat v8.0" server-type="org.eclipse.jst.server.tomcat.80" server-type-id="org.eclipse.jst.server.tomcat.80" start-timeout="45" stop-timeout="15" testEnvironment="true" timestamp="16">
+    <list key="modules" value0="Diary::org.eclipse.jst.jee.server:Diary::jst.web::2.5" value1="HeadFirstServletChap04::org.eclipse.jst.jee.server:HeadFirstServletChap04::jst.web::2.5" value2="HeadFirstServletChap03::org.eclipse.jst.jee.server:HeadFirstServletChap03::jst.web::2.5" value3="HeadFirstServletChap05::org.eclipse.jst.jee.server:HeadFirstServletChap05::jst.web::2.5" value4="HeadFirstServletChap06::org.eclipse.jst.jee.server:HeadFirstServletChap06::jst.web::2.5" value5="HeadFirstServletChap07::org.eclipse.jst.jee.server:HeadFirstServletChap07::jst.web::2.5" value6="HeadFirstServletChap08::org.eclipse.jst.jee.server:HeadFirstServletChap08::jst.web::2.5" value7="HeadFirstCSS::org.eclipse.jst.jee.server:HeadFirstCSS::jst.web::2.5"/>
+  </server>
+</servers>

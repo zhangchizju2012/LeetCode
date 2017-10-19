@@ -39,6 +39,7 @@ public class test{
 		char b = 'b';
 		System.out.println(sb.equals(sb.reverse()));
 		System.out.println(sb.substring(0, 2));
+		System.out.println((int)1.2);
 		
 		
 	}

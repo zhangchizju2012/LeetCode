@@ -1,0 +1,12 @@
+package ood79;
+
+public class CircularArray <T> {
+	T[] array;
+	public CircularArray(int length) {
+		// TODO Auto-generated constructor stub
+		// array = new T[length]; // cannot create a generic array of T
+		// https://stackoverflow.com/questions/529085/how-to-create-a-generic-array-in-java
+		array = (T[]) new Object[length];
+	}
+	
+}

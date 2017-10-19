@@ -8,6 +8,7 @@ Created on Fri Jun 16 21:46:42 2017
 
 class Solution(object):
     def helper(self, word):
+        # 对于所有可能生成的回文，产生所缺的元素，缺左边的放左边，缺右边的放右边
         leftCandidate = []
         rightCandidate = []
         for i in xrange(len(word)*2+1):

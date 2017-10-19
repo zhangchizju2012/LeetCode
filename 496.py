@@ -14,6 +14,7 @@ class Solution(object):
         :type nums: List[int]
         :rtype: List[int]
         """
+        # 主要是对nums的操作，对findNums的操作只是最后对dict的查询而已，很弱智
         stack = [float('inf')] # 保证之后temp[-1]的正常运行，用来储存暂时未找到下个最大的元素，且他一定是从大到小排列的
         dic = {}
         for item in nums:

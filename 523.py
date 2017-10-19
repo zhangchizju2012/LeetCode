@@ -9,6 +9,8 @@ Created on Fri Jul  7 19:50:50 2017
 class Solution(object):
     # 自己写的，复杂度应该是n^2
     # 看大家的提交记录，应该是有优化算法的
+    # 优化算法我其实想到了的 https://discuss.leetcode.com/topic/80793/java-o-n-time-o-k-space
+    # 就是从左到右，记录总和（mod过的），如果之前出现过，说明中间有一段就是n倍的k
     def checkSubarraySum(self, nums, k):
         """
         :type nums: List[int]

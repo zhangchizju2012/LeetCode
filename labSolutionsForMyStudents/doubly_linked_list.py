@@ -28,7 +28,7 @@ class Doubly_Linked_List:
     # creates a new doubly linked list
     # head and tail are initialized to None
     def __init__(self):
-        self.head=None
+        self.head=None 
         self.tail=None
         self.__size=0
     
@@ -197,6 +197,14 @@ class Doubly_Linked_List:
             current = current.getPrevious()
         return "<-".join(output)
                  
-                 
+class Queue:
+    def __init__(self):
+        self.items = Doubly_Linked_List()
+    
+    def enqueue(self, item):
+        self.items.add(item)
+    
+    def dequeue(self):
+        self.items.pop()
                  
                  

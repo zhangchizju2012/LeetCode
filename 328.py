@@ -39,6 +39,10 @@ class Solution(object):
         tempOdd.next = even.next
         return odd.next
         
+    # 改进的方向：https://discuss.leetcode.com/topic/34292/simple-o-n-time-o-1-space-java-solution
+    # 在linked list内部操作，最后连起来
+    
+        
 n = ListNode(1)
 n.next = ListNode(2)
 n.next.next = ListNode(3)

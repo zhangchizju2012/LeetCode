@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>Diary</display-name>
+  <welcome-file-list>
+    <welcome-file>login.jsp</welcome-file>
+  </welcome-file-list>
+  
+  
+  <servlet>
+  	<servlet-name>LoginServlet</servlet-name> <!-- 给servlet一个名字，跟后面的名字要相同 -->
+  	<servlet-class>com.java1234.web.LoginServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>LoginServlet</servlet-name>
+  	<url-pattern>/login</url-pattern>
+  	<!-- 整体的意思：请求/helloWorld这个地址，里面就会看到helloWorld对应的servlet-name是helloWorldServlet -->
+  	<!-- 然后找到匹配的servlet（根据servlet-name相同）,然后找到对应的servlet-class -->
+  </servlet-mapping>
+</web-app>

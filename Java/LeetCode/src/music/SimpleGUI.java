@@ -24,12 +24,13 @@ class MyDrawPanel extends JPanel{
 }
 
 //public class SimpleGUI implements MouseListener {
-public class SimpleGUI implements ActionListener {
-	JButton button;
-	JButton button2;
+public class SimpleGUI {
+	JButton buttonColor;
+	JButton buttonText;
 	JLabel label;
 	MyDrawPanel mp;
 	int count = 0;
+	
 	public static void main(String[] args){
 		SimpleGUI sg = new SimpleGUI();
 		sg.go();
@@ -39,10 +40,10 @@ public class SimpleGUI implements ActionListener {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		button = new JButton("change color");
-		button2 = new JButton("change label");
-		frame.getContentPane().add(BorderLayout.SOUTH, button);
-		frame.getContentPane().add(BorderLayout.EAST, button2);
+		buttonColor = new JButton("change color");
+		buttonText = new JButton("change label");
+		frame.getContentPane().add(BorderLayout.SOUTH, buttonColor);
+		frame.getContentPane().add(BorderLayout.EAST, buttonText);
 		
 		mp = new MyDrawPanel();
 		frame.getContentPane().add(mp);
@@ -53,18 +54,29 @@ public class SimpleGUI implements ActionListener {
 		
 		frame.setSize(500, 500);
 		frame.setVisible(true);
-		button.addActionListener(this);
+		buttonColor.addActionListener(new Button1Listen());
+		//buttonColor是监听的，一旦监听到满足条件的行为就会导致：Button1Listen()后面带的action真正执行
+		buttonText.addActionListener(new Button2Listen());
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		if(count%2==1){
-			button.setText("change");
-		}else{
-			button.setText("click me");
+	class Button1Listen implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			mp.repaint();
 		}
-		count += 1;
-		mp.repaint();
+	}
+	// 内部类让不同的按钮对于相同的事件有不同的处理
+	class Button2Listen implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+//			if(count%2==1){
+//				label.setText("changed blbl");
+//			}else{
+//				label.setText("change label");
+//			}
+			label.setText("fuck");
+			count += 1;
+		}
 	}
 }

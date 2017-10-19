@@ -36,3 +36,5 @@ class Solution(object):
             self.result[(i,j)] = temp
         return self.result[(i,j)]
         
+s = Solution()
+print s.minDistance("sea", "")
