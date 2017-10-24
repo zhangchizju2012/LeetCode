@@ -5,6 +5,7 @@ Created on Sun Oct 22 21:37:45 2017
 
 @author: zhangchi
 """
+import copy
 
 class Solution(object):
     def solveSudoku(self, board):
@@ -60,18 +61,22 @@ class Solution(object):
                     left[(i,j)] = full.difference(left[(i,j)])
                     
         return self.helper(dict(left), list(board))
+        # 这里不用加dict,list
         
                     
     def helper(self, lastLeft, lastBoard):
         if len(lastLeft) == 0:
             return lastBoard
         else:
+            # 先找candidate少的，所以排个序，本质是DFS
             temp = [(item,lastLeft[item]) for item in lastLeft]
             temp.sort(key=lambda x:len(x[1]))
             if len(temp[0][1]) > 0:
                 for value in temp[0][1]:
-                    left = dict(lastLeft)
-                    board = list(lastBoard)
+                    # 直接dict(lastLeft)会出错
+                    left = copy.deepcopy(lastLeft)
+                    board = copy.deepcopy(lastBoard)
+                    label = True
                     
                     position = temp[0][0]
                     board[position[0]][position[1]] = value
@@ -81,24 +86,42 @@ class Solution(object):
                     for i in xrange(9):
                         if (i,position[1]) in left and value in left[(i,position[1])]:
                             left[(i,position[1])].remove(value)
+                            if len(left[(i,position[1])]) == 0:
+                                # candidate数量为0，可以提前结束这种可能性
+                                label = False
+                                break
                         if (position[0],i) in left and value in left[(position[0],i)]:
                             left[(position[0],i)].remove(value)
-                    m = position[0] // 3
-                    n = position[1] // 3
-                    for i in xrange(3):
-                        for j in xrange(3):
-                            if (3*m+i,3*n+j) in left and value in left[(3*m+i,3*n+j)]:
-                                left[(3*m+i,3*n+j)].remove(value)
-                            
-                    
-                    result = self.helper(dict(left), list(board))
-                    if result is not None:
-                        return result
-                        
-                        
+                            if len(left[(position[0],i)]) == 0:
+                                label = False
+                                break
+                    if label is True:
+                        m = position[0] // 3
+                        n = position[1] // 3
+                        for i in xrange(3):
+                            for j in xrange(3):
+                                if (3*m+i,3*n+j) in left and value in left[(3*m+i,3*n+j)]:
+                                    left[(3*m+i,3*n+j)].remove(value)
+                                    if len(left[(3*m+i,3*n+j)]) == 0:
+                                        label = False
+                                        break
+                                    
+                        if label is True:
+                            result = self.helper(left, board)
+                            if result is not None:
+                                return result
     
 s = Solution()
-a = [[".",".","9","7","4","8",".",".","."],["7",".",".",".",".",".",".",".","."],[".","2",".","1",".","9",".",".","."],[".",".","7",".",".",".","2","4","."],[".","6","4",".","1",".","5","9","."],[".","9","8",".",".",".","3",".","."],[".",".",".","8",".","3",".","2","."],[".",".",".",".",".",".",".",".","6"],[".",".",".","2","7","5","9",".","."]]
+#a = [["."]*9 for _ in xrange(9)]
+a = [[".",".","9","7","4","8",".",".","."],
+     ["7",".",".",".",".",".",".",".","."],
+     [".","2",".","1",".","9",".",".","."],
+     [".",".","7",".",".",".","2","4","."],
+     [".","6","4",".","1",".","5","9","."],
+     [".","9","8",".",".",".","3",".","."],
+     [".",".",".","8",".","3",".","2","."],
+     [".",".",".",".",".",".",".",".","6"],
+     [".",".",".","2","7","5","9",".","."]]
 # =============================================================================
 # a = [["5","3",".",".","7",".",".",".","."],
 #      ["6",".",".","1","9","5",".",".","."],
@@ -110,4 +133,5 @@ a = [[".",".","9","7","4","8",".",".","."],["7",".",".",".",".",".",".",".","."]
 #      [".",".",".","4","1","9",".",".","5"],
 #      [".",".",".",".","8",".",".","7","9"]]
 # =============================================================================
-print s.solveSudoku(a)
+b = s.solveSudoku(a)
+print b
