@@ -29,30 +29,22 @@ class Solution(object):
         numList.append(previous)
         countList.append(count)
         
+        for item in countList:
+            k = k - item * (item - 1) / 2
+            
+        if k <= 0:
+            return 0
         
         import heapq
         heap = []
+        count = 0
         length = len(numList)
         for i in xrange(length):
-            for j in xrange(i,length):
-                if j == i and countList[i] > 0:
+            for j in xrange(i+1,length):
                     distance = numList[j] - numList[i]
-                    number = countList[i]*(countList[i]-1)/2
-                    if number < k:
-                        k = k - number
-                    else:
-                        for _ in xrange(countList[i]*(countList[i]-1)/2):
-                            if len(heap) < k:
-                                heapq.heappush(heap,-1 * distance)
-                            else:
-                                minValue = heapq.heappop(heap)
-                                if distance < (-1 * minValue):
-                                    heapq.heappush(heap,-1 * distance)
-                                else:
-                                    heapq.heappush(heap, minValue)
-                else:
-                    distance = numList[j] - numList[i]
-                    number = countList[i]*countList[j]
+                    number = countList[i] * countList[j]
+                    if count + number <= k:
+                        
                     if number < k:
                         k = k - number
                     else:
