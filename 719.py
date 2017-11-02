@@ -28,6 +28,7 @@ class Solution(object):
 # =============================================================================
         while maxValue > smallValue:
             middle = (maxValue - smallValue) // 2 + smallValue
+            # 取中值取到的值可能是不存在的值
             temp1 = self.count(middle)
             # this is wired
 # =============================================================================
