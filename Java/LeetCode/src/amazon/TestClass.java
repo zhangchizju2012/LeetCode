@@ -1,0 +1,37 @@
+/**
+ * @author zhangchi
+ *
+ * 2017年10月20日 下午3:18:00
+ */
+package amazon;
+
+/**
+ * @author zhangchi
+ * 2017年10月20日 下午3:18:00
+ */
+class Habbit{
+	String title;
+	String reason;
+	public Habbit(String t, String r) {
+		title = t;
+		reason = r;
+	}
+}
+
+class HabbitEvent{
+	Habbit habbit;
+	public HabbitEvent(Habbit h) {
+		habbit = h;
+	}
+}
+
+public class TestClass {
+	public static void main(String[] args){
+		Habbit habbit = new Habbit("title", "reason");
+		HabbitEvent habbitEvent = new HabbitEvent(habbit);
+		System.out.println(habbitEvent.habbit.title);
+		
+		habbit.title = "changedTitle";
+		System.out.println(habbitEvent.habbit.title);
+	}
+}

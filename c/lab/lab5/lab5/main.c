@@ -8,18 +8,28 @@
 
 #include <stdio.h>
 
-void pb(int n){
-    if(n != 0){
-        pb(n / 2);
-        putchar('0' + n % 2);
-    }
-}
-
 int main(int argc, const char * argv[]) {
-    pb(5);
-    printf("\n");
+    int i = 1;
+    int j = 100;
+    int k = +(+(+i)+(+j));//(++i)+(++j);//(i++)+(j++);
+    printf("%d\n",i);
+    printf("%d\n",j);
+    printf("%d\n",k);
     return 0;
 }
+
+//void pb(int n){
+//    if(n != 0){
+//        pb(n / 2);
+//        putchar('0' + n % 2);
+//    }
+//}
+//
+//int main(int argc, const char * argv[]) {
+//    pb(17);
+//    printf("\n");
+//    return 0;
+//}
 
 //void create_magic_square(int size, int magic_square[size][size]){
 //    int i = 0;

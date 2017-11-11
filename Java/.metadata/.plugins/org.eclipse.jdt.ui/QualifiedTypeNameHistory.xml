@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.nio.channels.NetworkChannel"/>
-<fullyQualifiedTypeName name="java.awt.datatransfer.StringSelection"/>
 <fullyQualifiedTypeName name="q105.TreeNode"/>
 <fullyQualifiedTypeName name="q105.Solution"/>
 <fullyQualifiedTypeName name="java.util.Stack"/>
@@ -56,8 +54,10 @@
 <fullyQualifiedTypeName name="java.util.LinkedList"/>
 <fullyQualifiedTypeName name="amazon.RoundRobinScheduling"/>
 <fullyQualifiedTypeName name="java.sql.SQLNonTransientConnectionException"/>
-<fullyQualifiedTypeName name="java.lang.String"/>
 <fullyQualifiedTypeName name="amazon.Point"/>
 <fullyQualifiedTypeName name="amazon.OverlapRectangle"/>
+<fullyQualifiedTypeName name="java.lang.String"/>
+<fullyQualifiedTypeName name="amazon.Habbit"/>
+<fullyQualifiedTypeName name="amazon.HabbitEvent"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
 </qualifiedTypeNameHistroy>

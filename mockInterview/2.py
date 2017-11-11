@@ -35,7 +35,20 @@ Created on Tue Nov  7 23:21:05 2017
 # [output] integer
 # =============================================================================
 
+# O(1) space
 def get_different_number(arr):
+  length = len(arr)
+  for i in xrange(length):
+    value = arr[i]
+    if value < length:
+      arr[i], arr[value] = arr[value], arr[i]
+  for i in xrange(length):
+    if i != arr[i]:
+      return i
+  return length
+
+# O(n) space
+def get_different_number2(arr):
   dic = set()
   for item in arr:
     dic.add(item)
