@@ -51,6 +51,7 @@ class Solution(object):
                 result = S[i:j+1]
         return result
     
+    
 s = Solution()
 # =============================================================================
 # a="cnhczmccqouqadqtmjjzl"
