@@ -127,7 +127,6 @@ class Solution(object):
                 result += str(dic[item])
         return result
                 
-
         
 s = Solution()
 print s.countOfAtoms("H2O")
