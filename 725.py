@@ -50,6 +50,7 @@ class Solution(object):
             result.append(node.next)
         return result
                 
+    
 s = Solution()
 node = ListNode(1)
 node.next = ListNode(2)
