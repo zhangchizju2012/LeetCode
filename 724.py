@@ -24,5 +24,6 @@ class Solution(object):
                 left += item
         return -1
             
+    
 s = Solution()
 print s.pivotIndex([-1,-1,-1,-1,-1,0])
