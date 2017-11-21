@@ -1,6 +1,45 @@
 #!/usr/bin/env python2
 # -*- coding: utf-8 -*-
 """
+Reviewed on Tue Nov 21 11:25:46 2017
+
+@author: zhangchi
+"""
+
+
+class Solution(object):
+    def numIslands(self, grid):
+        """
+        :type grid: List[List[str]]
+        :rtype: int
+        """
+        self.grid = grid
+        result = 0
+        self.row = row = len(grid)
+        if row == 0:
+            return 0
+        self.length = length = len(grid[0])
+        for i in xrange(row):
+            for j in xrange(length):
+                if self.grid[i][j] == '1':
+                    result += 1
+                    self.search(i,j)
+        return result
+        
+    
+    def search(self, i, j):
+        self.grid[i][j] = '2'
+        if 0 <= i-1 < self.row and 0 <= j < self.length and self.grid[i-1][j] == '1':
+            self.search(i-1,j)
+        if 0 <= i+1 < self.row and 0 <= j < self.length and self.grid[i+1][j] == '1':
+            self.search(i+1,j)
+        if 0 <= i < self.row and 0 <= j-1 < self.length and self.grid[i][j-1] == '1':
+            self.search(i,j-1)
+        if 0 <= i < self.row and 0 <= j+1 < self.length and self.grid[i][j+1] == '1':
+            self.search(i,j+1)
+
+
+"""
 Created on Sat Apr 29 17:13:47 2017
 
 @author: zhangchi
