@@ -71,7 +71,26 @@ def generateAllPossibility(number):
 def calculateDistance(a,b):
     return abs(a.x-b.x) + abs(a.y-b.y)
 
-nodesValue = [[0,0],[0,90],[70,100],[100,55],[30,30],[30,70],[70,90],[70,30],[50,50],[45,0]]
+nodesValue = [[99, 26],
+ [78, 9],
+ [13, 85],
+ [78, 65],
+ [6, 2],
+ [21, 32],
+ [21, 0],
+ [9, 81],
+ [46, 37],
+ [8, 37],
+ [49, 96],
+ [88, 100],
+ [72, 26],
+ [84, 88],
+ [75, 36],
+ [22, 88],
+ [39, 100],
+ [31, 76],
+ [83, 27],
+ [67, 13]]
 nodes = [Node(item[0],item[1]) for item in nodesValue]
 draw(nodes)
 
