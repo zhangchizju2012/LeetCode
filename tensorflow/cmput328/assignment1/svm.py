@@ -14,7 +14,10 @@ import timeit
 
 def run():#x_test):
     n_samples = 55000
-    batch_size = 5
+    batch_size = 128 # 5
+    lr = 0.05
+    C = 0.002
+    num_epochs=50
     
     # parameters settings
     mnist = read_data_sets("data", one_hot=True)
@@ -33,21 +36,38 @@ def run():#x_test):
         W = tf.get_variable("weights", (784, 10),
                             initializer=tf.random_normal_initializer())
         b = tf.get_variable("bias", (10,),
-                            initializer=tf.random_normal_initializer())
-                            #initializer=tf.constant_initializer(0.0))
+                            #initializer=tf.random_normal_initializer())
+                            initializer=tf.constant_initializer(0.0))
         y_pred = tf.matmul(X, W) + b
-        temp = tf.maximum(0., 1 - tf.multiply(y, y_pred))
-        loss = tf.reduce_sum(temp, axis = 0)
+        #right = tf.reduce_sum(tf.maximum(0., 1 - tf.multiply(y, y_pred)))
+        #right2 = tf.losses.hinge_loss(logits=y_pred, labels=y)
+        #left = tf.reduce_mean(tf.multiply(W, W))
+        #left2 = tf.reduce_mean(tf.square(W))
+        #loss =C*tf.losses.hinge_loss(logits=y_pred, labels=y) + 0.5*tf.reduce_mean(tf.square(W))
+        #loss = tf.reduce_mean(left, axis = 0) * 0.5 + C * tf.reduce_sum(right, axis = 0)
+        #loss = tf.reduce_mean(left) * 0.5 + C * tf.reduce_sum(right) / 508.
+        left = tf.multiply(W, W)
+        right = tf.maximum(0., 1 - tf.multiply(y, y_pred))
+        loss = tf.reduce_mean(left, axis = 0) * 0.5 + C * tf.reduce_sum(right, axis = 0)
+        #loss = tf.reduce_mean(left) * 0.5 + C * tf.reduce_sum(right)
+
+    operation = tf.train.GradientDescentOptimizer(learning_rate=lr).minimize(loss)
         
     with tf.Session() as sess:
         # Initialize Variables in graph
         sess.run(tf.global_variables_initializer())
-        indices = np.random.choice(n_samples, batch_size)
-        X_batch, y_batch = x_train[indices], y_train[indices]
-        #y_batch = np.reshape(y_batch, (batch_size,1))
-        temp_, loss_ = sess.run([temp, loss], feed_dict={X: X_batch, y: y_batch})
-        print(temp_)
-        print(loss_)
+        for i in range(10000):
+            indices = np.random.choice(n_samples, batch_size)
+            X_batch, y_batch = x_train[indices], y_train[indices]
+            #y_batch = np.reshape(y_batch, (batch_size,1))
+            #left_, left2_, right_, right2_ = sess.run([left, left2, right, right2], feed_dict={X: X_batch, y: y_batch})
+            _, loss_ = sess.run([operation, loss], feed_dict={X: X_batch, y: y_batch})
+            if i % 10 == 0:
+                print(loss_)
+                #print(left_)
+                #print(left2_)
+                #print(right_)
+                #print(right2_)
     
     predicted_y_test = []
     
