@@ -1,35 +1,89 @@
 import timeit
 from cifar10 import Cifar10
-from ops import conv_layer, conv_batch_relu
+from ops import conv_layer, conv_batch_relu, batch_relu_conv, batch_relu, residual
 import numpy as np
 import math
 import os
 import tensorflow as tf
+
+he_normal = tf.keras.initializers.he_normal()
 
 def Net(inputs, dropout_kept_prob, is_training):
     
     # X = tf.placeholder(tf.float32, shape=(None, 32, 32, 3))
     # y = tf.placeholder(tf.float32, shape=(None, 10))
     
-    layer1 = conv_batch_relu(inputs, 1, is_training, 3, 3, 3, 16)
-    layer2 = conv_batch_relu(layer1, 2, is_training, 3, 3, 16, 16)
-    layer3 = conv_batch_relu(layer2, 3, is_training, 3, 3, 16, 16)
+    with tf.variable_scope("start"):
+        x = conv_layer(inputs, 1, 3, 3, 3, 16)
+        
+    with tf.variable_scope("unit-1"):
+        x = residual(x, is_training, 3, 3, 16, 16, 16)
+        
+    with tf.variable_scope("link-1"):
+        x = batch_relu_conv(x, is_training, 3, 3, 16, 32)
+        
+    with tf.variable_scope("unit-2"):
+        x = residual(x, is_training, 3, 3, 32, 32, 32)
+        
+    with tf.variable_scope("link-2"):
+        x = batch_relu_conv(x, is_training, 3, 3, 32, 128)
+        
+    with tf.variable_scope("unit-3"):
+        x = residual(x, is_training, 3, 3, 128, 128, 128)
+        
+    with tf.variable_scope("out"):
+        x = batch_relu(x, is_training)
     
-    layer4 = conv_batch_relu(layer3, 4, is_training, 3, 3, 16, 32)
-    layer5 = conv_batch_relu(layer4, 5, is_training, 3, 3, 32, 32)
-    layer6 = conv_batch_relu(layer5, 6, is_training, 3, 3, 32, 32)
+    shape = int(np.prod(x.get_shape()[1:]))
+    reshaped = tf.reshape(x, (-1, shape))
+
+    drop = tf.nn.dropout(reshaped, dropout_kept_prob, name='drop') 
+
+    # fc
+    with tf.variable_scope('output'):
+        W = tf.get_variable('W', [drop.get_shape()[1], 10], 
+                            initializer=he_normal)
+        b = tf.get_variable('b', [10], initializer=tf.constant_initializer(0.0))
+        out = tf.matmul(drop, W) + b
     
-    layer7 = conv_batch_relu(layer6, 7, is_training, 3, 3, 32, 128)
-    layer8 = conv_batch_relu(layer7, 8, is_training, 3, 3, 128, 128)
-    layer9 = conv_batch_relu(layer8, 9, is_training, 3, 3, 128, 128)
-    
-    fully = tf.contrib.layers.fully_connected(layer9, 100, activation_fn=None)
-    shape = int(np.prod(fully.get_shape()[1:]))
-    fully = tf.reshape(fully, (-1, shape))
-    
-    W = tf.Variable(tf.truncated_normal([shape, 10], stddev=0.1))
-    b = tf.Variable(tf.constant(0.1, shape=[10]))
-    scores = tf.nn.xw_plus_b(fully, W, b)
+    return out
+        
+# =============================================================================
+#     fully = tf.contrib.layers.fully_connected(x, 100, activation_fn=None)
+#     shape = int(np.prod(fully.get_shape()[1:]))
+#     fully = tf.reshape(fully, (-1, shape))
+#     
+#     #W = tf.Variable(tf.truncated_normal([shape, 10], stddev=0.1))
+#     #b = tf.Variable(tf.constant(0.1, shape=[10]))
+#     
+#     W = tf.get_variable(name='W-fully', shape=[shape, 10], initializer=he_normal)
+#     b = tf.get_variable(name='b-fully', shape=[10], initializer=tf.constant_initializer(0.0))
+# 
+#     scores = tf.nn.xw_plus_b(fully, W, b)
+# =============================================================================
+        
+        
+# =============================================================================
+#     layer1 = conv_batch_relu(inputs, 1, is_training, 3, 3, 3, 16)
+#     layer2 = conv_batch_relu(layer1, 2, is_training, 3, 3, 16, 16)
+#     layer3 = conv_batch_relu(layer2, 3, is_training, 3, 3, 16, 16)
+#     
+#     layer4 = conv_batch_relu(layer3, 4, is_training, 3, 3, 16, 32)
+#     layer5 = conv_batch_relu(layer4, 5, is_training, 3, 3, 32, 32)
+#     layer6 = conv_batch_relu(layer5, 6, is_training, 3, 3, 32, 32)
+#     
+#     layer7 = conv_batch_relu(layer6, 7, is_training, 3, 3, 32, 128)
+#     layer8 = conv_batch_relu(layer7, 8, is_training, 3, 3, 128, 128)
+#     layer9 = conv_batch_relu(layer8, 9, is_training, 3, 3, 128, 128)
+#     
+#     fully = tf.contrib.layers.fully_connected(layer9, 100, activation_fn=None)
+#     shape = int(np.prod(fully.get_shape()[1:]))
+#     fully = tf.reshape(fully, (-1, shape))
+#     
+#     W = tf.Variable(tf.truncated_normal([shape, 10], stddev=0.1))
+#     b = tf.Variable(tf.constant(0.1, shape=[10]))
+#     scores = tf.nn.xw_plus_b(fully, W, b)
+# =============================================================================
     
 # =============================================================================
 #     predictions = tf.argmax(scores, 1)
@@ -38,7 +92,7 @@ def Net(inputs, dropout_kept_prob, is_training):
 #     correct = tf.equal(tf.argmax(y, 1), predictions)
 #     accuracy = tf.reduce_mean(tf.cast(correct, "float"))
 # =============================================================================
-    return scores
+    #return scores
     
 def train(batch_size=128, num_epochs=100):
     # Always use tf.reset_default_graph() to avoid error
