@@ -13,26 +13,41 @@ def Net(inputs, dropout_kept_prob, is_training):
     # X = tf.placeholder(tf.float32, shape=(None, 32, 32, 3))
     # y = tf.placeholder(tf.float32, shape=(None, 10))
     
-    with tf.variable_scope("start"):
+    with tf.variable_scope("start-1"):
         x = conv_layer(inputs, 1, 3, 3, 3, 16)
         
     with tf.variable_scope("unit-1"):
         x = residual(x, is_training, 3, 3, 16, 16, 16)
         
-    with tf.variable_scope("link-1"):
-        x = batch_relu_conv(x, is_training, 3, 3, 16, 32)
+    with tf.variable_scope("end-1"):
+        x = batch_relu(x, is_training)
+        
+    with tf.variable_scope("pool-1"):
+        x = tf.nn.max_pool(x, ksize = [1, 2, 2, 1], strides = [1, 2, 2, 1], padding = "SAME")
+        
+    with tf.variable_scope("start-2"):
+        x = conv_layer(x, 1, 3, 3, 16, 32)
         
     with tf.variable_scope("unit-2"):
         x = residual(x, is_training, 3, 3, 32, 32, 32)
         
-    with tf.variable_scope("link-2"):
-        x = batch_relu_conv(x, is_training, 3, 3, 32, 128)
+    with tf.variable_scope("end-2"):
+        x = batch_relu(x, is_training)
+        
+    with tf.variable_scope("pool-2"):
+        x = tf.nn.max_pool(x, ksize = [1, 2, 2, 1], strides = [1, 2, 2, 1], padding = "SAME")
+        
+    with tf.variable_scope("start-3"):
+        x = conv_layer(x, 1, 3, 3, 32, 128)
         
     with tf.variable_scope("unit-3"):
         x = residual(x, is_training, 3, 3, 128, 128, 128)
         
-    with tf.variable_scope("out"):
+    with tf.variable_scope("end-3"):
         x = batch_relu(x, is_training)
+        
+    with tf.variable_scope("pool-3"):
+        x = tf.nn.max_pool(x, ksize = [1, 2, 2, 1], strides = [1, 2, 2, 1], padding = "SAME")
     
     shape = int(np.prod(x.get_shape()[1:]))
     reshaped = tf.reshape(x, (-1, shape))
