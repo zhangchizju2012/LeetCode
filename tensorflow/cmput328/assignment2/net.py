@@ -10,6 +10,8 @@ he_normal = tf.keras.initializers.he_normal()
 
 def Net(inputs, dropout_kept_prob, is_training):
     
+    inputs = inputs/255.
+    
     # X = tf.placeholder(tf.float32, shape=(None, 32, 32, 3))
     # y = tf.placeholder(tf.float32, shape=(None, 10))
     
