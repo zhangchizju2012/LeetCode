@@ -57,6 +57,44 @@ def train():
     X = tf.placeholder(tf.float32, shape=[None, input_dim], name='x')
     y = tf.placeholder(tf.float32, shape=[None, 1], name='y')
     output = Net(X)
-    loss = tf.keras.backend.binary_crossentropy(y, output)
+    loss = tf.reduce_sum(tf.keras.backend.binary_crossentropy(y, output))
     operation = tf.train.AdamOptimizer().minimize(loss)
+    #correct_predictions = tf.equal(tf.cast(tf.argmax(0, output - 0.5), dtype=tf.int32), tf.cast(y, dtype=tf.int32))
+    correct_predictions = tf.equal(output > 0.5, y > 0.5)
+    accuracy = tf.reduce_mean(tf.cast(correct_predictions, "float"))
     
+    num_epochs = 20
+    batch_size = 64
+    N = 5000
+    x_train, y_train = get_data(N, input_dim)
+    x_test, y_test = get_data(N, input_dim)
+    
+    with tf.Session() as sess:
+        # Initialize Variables in graph
+        sess.run(tf.global_variables_initializer())
+        
+        for epoch in range(num_epochs):
+            num_batches = N // batch_size
+            for iteration in range(num_batches):
+                indices = np.random.choice(N, batch_size)
+                X_batch, y_batch = x_train[indices], y_train[indices]
+                _, l, acc = sess.run([operation, loss, accuracy], feed_dict={X: X_batch, y: y_batch})
+            print("epoch:",epoch, "loss:", l, "acc:",acc)
+            
+# =============================================================================
+#         num_test_batches = len(x_test) // batch_size
+#         for iteration in range(num_test_batches + 1):
+#             if iteration != num_test_batches:
+#                 x_test_batch = x_test[:batch_size]
+#                 x_test = x_test[batch_size:]
+#             else:
+#                 x_test_batch = x_test[:len(x_test)]
+#                 x_test = x_test[len(x_test):]
+#             result = sess.run([pred_result], feed_dict={X: x_test_batch})[0]
+#             # pay attention to [0] and tolist() here
+#             predicted_y_test += result.tolist()
+#             
+#         print(predicted_y_test)
+# =============================================================================
+            
+train()
