@@ -3,7 +3,7 @@ from __future__ import print_function, division
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Created on Thu Mar  1 17:32:34 2018
+Created on Thu Mar  1 22:47:02 2018
 
 @author: zhangchi
 """
@@ -14,7 +14,6 @@ Toy example of attention layer use
 Train RNN (GRU) on IMDB dataset (binary classification)
 Learning and hyper-parameters were not tuned; script serves as an example 
 """
-#from __future__ import print_function, division
 
 import numpy as np
 import tensorflow as tf
@@ -25,10 +24,6 @@ from tqdm import tqdm
 
 from attention import attention
 from utils import get_vocabulary_size, fit_in_vocabulary, zero_pad, batch_generator
-
-from self_defined_attention import SelfBahdanauAttention
-
-tf.reset_default_graph()
 
 NUM_WORDS = 10000
 INDEX_FROM = 3
@@ -71,14 +66,35 @@ tf.summary.histogram('RNN_outputs', rnn_outputs)
 
 # Attention layer
 with tf.name_scope('Attention_layer'):
-    #attention_output, alphas = attention(rnn_outputs, ATTENTION_SIZE, return_alphas=True)
+    # attention_output, alphas = attention(rnn_outputs, ATTENTION_SIZE, return_alphas=True)
+    
+    print(rnn_outputs)
     
     rnn_outputs = tf.concat(rnn_outputs, 2)
-    att = SelfBahdanauAttention(50, rnn_outputs)
     
+    print(rnn_outputs)
+    
+    query=tf.zeros(dtype=tf.float32,shape=[BATCH_SIZE,HIDDEN_SIZE*2])
     previous_alignments=tf.zeros(dtype=tf.float32,shape=[BATCH_SIZE,SEQUENCE_LENGTH])
     
-    attention_output, alphas = att(previous_alignments)
+    att = tf.contrib.seq2seq.BahdanauAttention(num_units=50,memory=rnn_outputs)
+    
+    alphas = att(query,previous_alignments)
+
+    print(rnn_outputs)
+    
+    a = tf.expand_dims(alphas, -1)
+    print(a)
+    b = rnn_outputs * a
+    print(b)
+    attention_output = tf.reduce_sum(b, 1)
+    print(attention_output)
+
+    #attention_output = tf.reduce_sum(rnn_outputs * tf.expand_dims(alphas, -1), 1)
+    #attention_output = tf.reduce_sum(tf.multiply(rnn_outputs,tf.tile(tf.expand_dims(alphas,-1),[1,1,HIDDEN_SIZE*2])),1)
+    
+    
+    print(attention_output)
     
     tf.summary.histogram('alphas', alphas)
 
@@ -87,6 +103,7 @@ drop = tf.nn.dropout(attention_output, keep_prob_ph)
 
 # Fully connected layer
 with tf.name_scope('Fully_connected_layer'):
+    print(drop)
     W = tf.Variable(tf.truncated_normal([HIDDEN_SIZE * 2, 1], stddev=0.1))  # Hidden size is multiplied by 2 for Bi-RNN
     b = tf.Variable(tf.constant(0., shape=[1]))
     y_hat = tf.nn.xw_plus_b(drop, W, b)

@@ -1305,7 +1305,7 @@ def _self_bahdanau_score(keys, normalize):
   # Reshape from [batch_size, ...] to [batch_size, 1, ...] for broadcasting.
   # processed_query = array_ops.expand_dims(processed_query, 1)
   v = variable_scope.get_variable(
-      "attention_v", [num_units], dtype=dtype.float32)
+      "attention_v", [num_units], dtype=dtypes.float32)
 
   return math_ops.reduce_sum(v * math_ops.tanh(keys), [2])
 
@@ -1370,6 +1370,7 @@ class SelfBahdanauAttention(_BaseAttentionMechanism):
         memory_sequence_length=memory_sequence_length,
         score_mask_value=score_mask_value,
         name=name)
+    self.memory = memory
     self._num_units = num_units
     self._normalize = normalize
     self._name = name
